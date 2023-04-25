@@ -9,7 +9,7 @@ import Login from './Login';
 
 function App() {
 
-  const [user, setUser] = useState('');
+  const [user, setUser] = useState(null);
 
 
   useEffect(() => {
@@ -25,7 +25,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Navbar />
+        <Navbar user = {user} setUser = {setUser}/>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup onSignupSuccess={setUser}/>} />
