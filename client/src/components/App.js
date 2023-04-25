@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./Home";
+import Navbar from './NavBar';
+import Signup from './SignUp';
+import Login from './Login';
 
 
 
@@ -22,8 +25,11 @@ function App() {
   return (
     <div className="App">
       <Router>
+        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/signup" element={<Signup onSignupSuccess={setUser}/>} />
+          <Route path="/login" element={<Login onLoginSuccess={setUser} />} />
           {/* Add more routes here, if needed */}
         </Routes>
       </Router>
