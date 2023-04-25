@@ -15,8 +15,7 @@ function App() {
   useEffect(() => {
     // auto-login
     fetch("/checksession").then((r) => {
-      if (r.ok) {
-        r.json().then((user) => setUser(user))
+      if (r.ok) {r.json().then((user) => setUser(user))
       }
     });
    }, []);

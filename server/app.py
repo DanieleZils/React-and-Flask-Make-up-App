@@ -5,7 +5,7 @@ from sqlalchemy.exc import IntegrityError
 
 # Local imports
 from config import app
-from models import db, User
+from models import db, User, Cart, CartProduct, Product
 
 app.secret_key = 'your_secret_key'
 
