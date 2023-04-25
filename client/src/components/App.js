@@ -1,10 +1,24 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./Home";
 
 
 
 function App() {
+
+  const [user, setUser] = useState('');
+
+
+  useEffect(() => {
+    // auto-login
+    fetch("/checksession").then((r) => {
+      if (r.ok) {
+        r.json().then((user) => setUser(user))
+      }
+    });
+   }, []);
+
+
   return (
     <div className="App">
       <Router>

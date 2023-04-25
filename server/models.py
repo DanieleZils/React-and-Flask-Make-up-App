@@ -15,8 +15,6 @@ class User(db.Model, SerializerMixin):
     username = db.Column(db.String, unique=True, nullable=False)
     _password_hash = db.Column(db.String, nullable=False)
 
-    def __repr__(self):
-        return f'User{self.username}, ID {self.id}'
     
     @hybrid_property
     def password_hash(self):
@@ -32,6 +30,9 @@ class User(db.Model, SerializerMixin):
         return bcrypt.check_password_hash(
             self._password_hash, password.encode('utf-8'))
 
+
+    def __repr__(self):
+        return f'User{self.username}, ID {self.id}'
 
 
 
