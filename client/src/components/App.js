@@ -1,15 +1,18 @@
 import React from 'react';
-import { Switch, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./Home";
 
-// import './App.css';
+
 
 function App() {
   return (
     <div className="App">
-      <Routes >
-        <Route index element= {<Home/>} />
-      </Routes>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          {/* Add more routes here, if needed */}
+        </Routes>
+      </Router>
     </div>
   );
 }
