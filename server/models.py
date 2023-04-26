@@ -61,8 +61,16 @@ class Cart(db.Model, SerializerMixin):
     cart_products = db.relationship('CartProduct', backref='cart')
     products = association_proxy('cart_products', 'product')
 
-    def __repr__(self):
-        return f'<Cart {self.id}>'
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'is_ordered': self.is_ordered,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at,
+            'cart_products': [cart_product.to_dict() for cart_product in self.cart_products],
+            'product_quantities': {cart_product.product.id: cart_product.quantity for cart_product in self.cart_products}
+            }
    
 class Product(db.Model, SerializerMixin):
     __tablename__ = 'products'
@@ -86,7 +94,7 @@ class Product(db.Model, SerializerMixin):
 class CartProduct(db.Model, SerializerMixin):
     __tablename__ = 'cart_products'
 
-    serialize_rules = ('-cart', '-product')
+    serialize_rules = ('-cart', '-product', 'quantity')
 
     id = db.Column(db.Integer, primary_key = True)
     cart_id = db.Column(db.Integer, db.ForeignKey('carts.id'))
@@ -100,10 +108,16 @@ class CartProduct(db.Model, SerializerMixin):
         if value < 1:
             raise ValueError("Quantity must be at least 1.")
         return value
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'product': self.product.to_dict(),
+            'quantity': self.quantity
+        }
 
-    def __repr__(self):
-        return f'<CartProduct {self.id}>'
-
+    
+    
 
 
 

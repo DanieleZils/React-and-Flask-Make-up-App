@@ -1,4 +1,5 @@
 from flask import Flask, request, make_response, jsonify, session 
+from sqlalchemy.orm import Session
 from flask_migrate import Migrate
 from flask_restful import Api, Resource
 from sqlalchemy.exc import IntegrityError
@@ -95,32 +96,132 @@ api.add_resource(Logout, '/logout')
 # Products route
 class Products(Resource):
     def get(self):
-        products = Product.query.all()
-        return jsonify([product.to_dict() for product in products])
+        try:
+            products = Product.query.all()
+            return make_response([product.to_dict() for product in products], 200)
+        except Exception as e:
+            return make_response({"error": str(e)}, 500)
 
 api.add_resource(Products, '/products')
 
 class ProductById(Resource):
     def get(self, id):
-        product = Product.query.filter_by(id=id).first()
-        if product == None:
-            return make_response({'error': 'Product not found'}, 404)
-        return make_response(product.to_dict(), 200)
+        try:
+            product = Product.query.filter_by(id=id).first()
+            if product:
+                return make_response(product.to_dict(), 200)
+            return make_response({"error": "Product not found"}, 404)
+        except Exception as e:
+            return make_response({"error": str(e)}, 500)
 
 api.add_resource(ProductById, '/products/<int:id>')
 
-class CartResource(Resource):
 
+class CartResource(Resource):
     def get(self):
         user = User.query.get(session.get('user_id'))
         if user and user.cart:
-            return make_response(user.cart.to_dict(), 200)
-        return make_response({"error":"No cart found"}, 404)
-    
-    def post(self):
+            # Get the latest cart for the user
+            latest_cart = user.cart[-1]
+            return make_response(latest_cart.to_dict(), 200)
+        return make_response({"error": "No cart found"}, 404)
 
+    def post(self):
         data = request.get_json()
-        produ
+        product_id = data.get('product_id')
+
+        user = db.session.get(User, session.get('user_id'))
+        if not user:
+            return make_response({"error": "User not found"}, 404)
+
+        product = db.session.get(Product, product_id)
+        if not product:
+            return make_response({"error": "Product not found"}, 404)
+
+        try:
+            # Find an active cart or create a new one
+            cart = Cart.query.filter_by(user_id=user.id, is_ordered=False).first()
+            if not cart:
+                cart = Cart(user=user)
+                db.session.add(cart)
+                db.session.commit()
+
+            cart_product = CartProduct.query.filter_by(cart_id=cart.id, product_id=product.id).first()
+
+            if cart_product:
+                cart_product.quantity += 1
+            else:
+                cart_product = CartProduct(cart_id=cart.id, product_id=product.id)
+                db.session.add(cart_product)
+
+            db.session.commit()
+            return make_response(cart.to_dict(), 200)
+        except IntegrityError:
+            db.session.rollback()
+            return make_response({"error": "validation errors"}, 422)
+        except Exception as e:
+            return make_response({"error": str(e)}, 500)
+
+    def patch(self):
+        data = request.get_json()
+        cart_product_id = data.get('cart_product_id')
+        cart_product = CartProduct.query.filter_by(id=cart_product_id).first()
+
+        if not cart_product:
+            return make_response({"error": "CartProduct not found"}, 404)
+
+        try:
+            for attr in data:
+                setattr(cart_product, attr, data[attr])
+
+            db.session.add(cart_product)
+            db.session.commit()
+
+            response_dict = cart_product.to_dict()
+            response = make_response(response_dict, 200)
+            return response
+        except IntegrityError:
+            db.session.rollback()
+            return make_response({"error": "validation errors"}, 422)
+        except ValueError as e:
+            return make_response({"error": str(e)}, 400)
+        except Exception as e:
+            return make_response({"error": str(e)}, 500)
+
+    def delete(self):
+        data = request.get_json()
+        cart_product_id = data.get('cart_product_id')
+
+        cart_product = CartProduct.query.filter_by(id=cart_product_id).first()
+        if cart_product:
+            try:
+                db.session.delete(cart_product)
+                db.session.commit()
+                return make_response({}, 204)
+            except IntegrityError:
+                db.session.rollback()
+                return make_response({"error": "An error occurred while deleting the CartProduct"}, 422)
+        return make_response({"error": "CartProduct not found"}, 404)
+
+api.add_resource(CartResource, '/cart')
+
+class OrderResource(Resource):
+    def post(self):
+        user_id = session.get('user_id')
+        if user_id:
+            cart = Cart.query.filter_by(user_id=user_id, is_ordered=False).first()
+            if cart:
+                try:
+                    cart.is_ordered = True
+                    db.session.commit()
+                    return make_response(cart.to_dict(), 200)
+                except IntegrityError:
+                    db.session.rollback()
+                    return make_response({"error": "An error occurred while updating the cart status"}, 422)
+            return make_response({"error": "No cart found"}, 404)
+        return make_response({"error": "User not found"}, 404)
+
+api.add_resource(OrderResource, '/order')
 
 
 if __name__ == '__main__':
