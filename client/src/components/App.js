@@ -15,10 +15,11 @@ function App() {
   useEffect(() => {
     // auto-login
     fetch("/checksession").then((r) => {
-      if (r.ok) {r.json().then((user) => setUser(user))
+      if (r.ok && r.headers.get("Content-Length") !== "0") {
+        r.json().then((user) => setUser(user));
       }
     });
-   }, []);
+  }, []);
 
 
   return (
