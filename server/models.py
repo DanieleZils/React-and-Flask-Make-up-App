@@ -55,6 +55,8 @@ class Cart(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     is_ordered = db.Column(db.Boolean)
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
     cart_products = db.relationship('CartProduct', backref='cart')
     products = association_proxy('cart_products', 'product')
@@ -90,6 +92,14 @@ class CartProduct(db.Model, SerializerMixin):
     cart_id = db.Column(db.Integer, db.ForeignKey('carts.id'))
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
     quantity = db.Column(db.Integer, nullable = False, default = 1)
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime, onupdate=db.func.now())
+
+    @validates('quantity')
+    def validate_quantity(self, key, value):
+        if value < 1:
+            raise ValueError("Quantity must be at least 1.")
+        return value
 
     def __repr__(self):
         return f'<CartProduct {self.id}>'

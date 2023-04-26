@@ -41,8 +41,6 @@ class Signup(Resource):
 
 api.add_resource(Signup, '/signup')
 
-
-
 class CheckSession(Resource):
 
     def get(self):
@@ -83,7 +81,6 @@ class Login(Resource):
 api.add_resource(Login, '/login')
 
 
-
 class Logout(Resource):
 
     def delete(self):
@@ -93,6 +90,38 @@ class Logout(Resource):
         return {}, 204
     
 api.add_resource(Logout, '/logout')
+
+
+# Products route
+class Products(Resource):
+    def get(self):
+        products = Product.query.all()
+        return jsonify([product.to_dict() for product in products])
+
+api.add_resource(Products, '/products')
+
+class ProductById(Resource):
+    def get(self, id):
+        product = Product.query.filter_by(id=id).first()
+        if product == None:
+            return make_response({'error': 'Product not found'}, 404)
+        return make_response(product.to_dict(), 200)
+
+api.add_resource(ProductById, '/products/<int:id>')
+
+class CartResource(Resource):
+
+    def get(self):
+        user = User.query.get(session.get('user_id'))
+        if user and user.cart:
+            return make_response(user.cart.to_dict(), 200)
+        return make_response({"error":"No cart found"}, 404)
+    
+    def post(self):
+
+        data = request.get_json()
+        produ
+
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
