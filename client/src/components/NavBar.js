@@ -16,10 +16,13 @@ const Navbar = () => {
   }
 
 return (
-  <nav>
+  <nav className='navBar'>
     <div>
       <Link to="/">Home</Link>
-      </div>
+    </div>
+    <div>
+    <Link to="/products"> Products </Link>
+    </div>
       <div>
       {user ? (
           <>

@@ -2,6 +2,7 @@ import { createRoot } from 'react-dom/client';
 import App from './components/App';
 import React from 'react';
 import { UserContext, UserProvider } from './components/UserContext'
+import './index.css'
 
 
 const root = document.getElementById('root');

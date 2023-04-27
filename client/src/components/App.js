@@ -4,6 +4,8 @@ import Home from "./Home";
 import Navbar from './NavBar';
 import Signup from './SignUp';
 import Login from './Login';
+import Products from './Products';
+import ProductCard from './ProductCards';
 import { UserContext, UserProvider } from './UserContext';
 
 
@@ -11,8 +13,10 @@ import { UserContext, UserProvider } from './UserContext';
 function App() {
 
   const { user, setUser } = useContext(UserContext)
-  // const [ isLoginPage, setIsLoginPage] = useState(false);
 
+  //state:
+  // const [ isLoginPage, setIsLoginPage] = useState(false);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     // auto-login
@@ -22,6 +26,17 @@ function App() {
       }
     });
   }, []);
+
+  useEffect(() => {
+    fetch('/products')
+      .then(r => r.json())
+      .then(setProducts)
+  }, [])
+
+
+  let productCards = products.map( product => <ProductCard key={product.id} product={product} />)
+
+
 
 
   return (
@@ -33,12 +48,13 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login  />} />
+            <Route path="/products" element={<Products productCards={productCards} />}/>
             {/* Add more routes here, if needed */}
           </Routes>
         </Router>
       </div>
     </UserProvider>
     );
-}
+  }
 
 export default App;
