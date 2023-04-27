@@ -35,6 +35,7 @@ return (
           <Link to="/login">Login </Link>
           </>
       )}
+      <Link to = "/cart"> Cart </Link>
     </div>
   </nav>
   );
