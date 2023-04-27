@@ -7,6 +7,7 @@ import Login from './Login';
 import Products from './Products';
 import ProductCard from './ProductCards';
 import { UserContext, UserProvider } from './UserContext';
+import ProductDetail from './ProductDetail';
 
 
 
@@ -49,6 +50,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login  />} />
             <Route path="/products" element={<Products productCards={productCards} />}/>
+            <Route path="/products/:id" element={<ProductDetail />} />
             {/* Add more routes here, if needed */}
           </Routes>
         </Router>
