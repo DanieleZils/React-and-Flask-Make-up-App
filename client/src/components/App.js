@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./Home";
 import Navbar from './NavBar';
@@ -10,7 +10,8 @@ import { UserContext, UserProvider } from './UserContext';
 
 function App() {
 
-  const [user, setUser] = useState(null);
+  const { user, setUser } = useContext(UserContext)
+  // const [ isLoginPage, setIsLoginPage] = useState(false);
 
 
   useEffect(() => {
@@ -24,10 +25,10 @@ function App() {
 
 
   return (
-    <UserProvider value = {{ user, setUser }}>
+    <UserProvider >
       <div className="App">
         <Router>
-          <Navbar/>
+          <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/signup" element={<Signup />} />

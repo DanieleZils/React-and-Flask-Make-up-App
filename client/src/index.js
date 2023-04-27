@@ -1,13 +1,16 @@
 import { createRoot } from 'react-dom/client';
 import App from './components/App';
 import React from 'react';
+import { UserContext, UserProvider } from './components/UserContext'
 
 
 const root = document.getElementById('root');
 createRoot(root).render(
+  <UserProvider>
   <React.StrictMode>
     <App />
   </React.StrictMode>
+  </UserProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
