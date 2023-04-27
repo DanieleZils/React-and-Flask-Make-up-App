@@ -1,8 +1,11 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
+import { UserContext } from './UserContext';
 
 
 // pass setUser from App
-const Signup = ({onSignupSuccess}) => {
+const Signup = () => {
+    const { setUser } = useContext(UserContext);
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
   
@@ -28,7 +31,7 @@ const Signup = ({onSignupSuccess}) => {
           }),
         })
             .then(handleErrors)
-            .then((user) => onSignupSuccess(user))
+            .then((user) => setUser(user))
             .catch(error => console.log("Validation Error: Ensure all fields are valid", error))
                 
         

@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext} from "react";
+import { UserContext } from './UserContext';
 
-function Login({ onLoginSuccess }) {
+function Login() {
+    const { setUser } = useContext(UserContext);
+
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
@@ -26,7 +29,7 @@ function Login({ onLoginSuccess }) {
         }),
         })
             .then(handleErrors)
-            .then((user) => onLoginSuccess(user))
+            .then((user) => setUser(user))
             .catch(error => console.log("Validation Error: Ensure all fields are valid", error))
                 
     }
