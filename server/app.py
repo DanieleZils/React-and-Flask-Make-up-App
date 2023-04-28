@@ -142,7 +142,7 @@ class CartResource(Resource):
             # Find an active cart or create a new one
             cart = Cart.query.filter_by(user_id=user.id, is_ordered=False).first()
             if not cart:
-                cart = Cart(user=user)
+                cart = Cart(user=user, is_ordered=False)  # Ensure is_ordered is set to False
                 db.session.add(cart)
                 db.session.commit()
 

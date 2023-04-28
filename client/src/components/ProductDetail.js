@@ -1,7 +1,6 @@
-import React, {useState, useEffect} from "react";
-import { useParams } from "react-router-dom";
-
-
+import React, {useState, useEffect, useContext} from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { UserContext } from "./UserContext";
 
 
 function ProductDetail(){
@@ -9,6 +8,8 @@ function ProductDetail(){
     const [product, setProductDetail] = useState("")
 
     const { id } = useParams()
+    const navigate = useNavigate();
+    const { user } = useContext(UserContext);
 
     useEffect(() => {
         fetch(`/products/${id}`)
@@ -16,17 +17,42 @@ function ProductDetail(){
             .then(product => setProductDetail(product))
     }, [id])
 
+    //i need to add a function that posts the product to the cart of the user, and then redirects to the cart page
+    //only looged in users can add to cart
+
+    function addToCart(){
+        if (!user){
+            alert ("Please login to add items to cart.");
+            navigate("/login");
+        } else {
+        fetch("/cart", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",},
+            body: JSON.stringify({
+                product_id: product.id,
+            }),
+            })
+            .then((r) => r.json())
+            .then((data) => {
+                if (!data.error){
+                    navigate("/cart");
+                } else {
+                    alert("Something went wrong. Please try again.");
+                }
+            })}
+    }
+
     return (
         <div className="productDetail">
             <div className="pDetailImg">
-                <img  src={product.image_url} alt={product.name}/>
+                <img style={{width:"200px"}} src={product.image_url} alt={product.name}/>
             </div>
             <div className="pInfo">
-                <h1>{product.name}</h1>
-                <br />
+                <h2>{product.name}</h2>
                 <h3>{product.category}</h3>
                 <h3> ${product.price} </h3>
-                <button className="addToCart">Add to Cart </button>
+                <button className="addToCart" onClick={addToCart}>Add to Cart </button>
             </div>
             <br />
             <h2 className="h2">About the Product: </h2>

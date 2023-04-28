@@ -22,6 +22,15 @@ function Cart(){
     if (!user) {
         return <p>You must be logged in to view your cart.</p>;}
 
+    function deleteFromCart(cartProductId){
+        fetch('/cart', {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",},
+                
+        })
+    }
+
 
 
     return (
@@ -29,6 +38,7 @@ function Cart(){
         <h1>Your Cart</h1>
          {cart?.cart_products?.map((cartProduct) => (
             <div key={cartProduct.id}>
+                <img style={{width:"200px"}} src={cartProduct.product.image_url} alt={cartProduct.product.name} />
                 <h2>{cartProduct.product.name}</h2>
                 <p>Quantity: {cartProduct.quantity}</p>
                 <button>Delete</button>
