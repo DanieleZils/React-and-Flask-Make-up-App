@@ -119,7 +119,7 @@ api.add_resource(ProductById, '/products/<int:id>')
 
 class CartResource(Resource):
     def get(self):
-        user = User.query.get(session.get('user_id'))
+        user = db.session.get(User, session.get('user_id'))
         if user and user.cart:
             # Get the latest cart for the user
             latest_cart = user.cart[-1]
