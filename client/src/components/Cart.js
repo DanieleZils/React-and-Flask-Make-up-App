@@ -22,14 +22,34 @@ function Cart(){
     if (!user) {
         return <p>You must be logged in to view your cart.</p>;}
 
-    function deleteFromCart(cartProductId){
-        fetch('/cart', {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",},
-                
-        })
-    }
+     
+function deleteFromCart(cartProductId) {
+    fetch("/cart", {
+    method: "DELETE",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+        cart_product_id: cartProductId,
+    }),
+    })
+    .then((response) => {
+        if (response.status === 204) {
+        // Update the cart state by removing the deleted product
+        setCart((prevCart) => {
+            return {
+            ...prevCart,
+            cart_products: prevCart.cart_products.filter(
+                (cartProduct) => cartProduct.id !== cartProductId
+            ),
+            };
+        });
+        } else {
+        alert("Something went wrong. Please try again.");
+        }
+    })
+    .catch((error) => console.log(error));
+}
 
 
 
@@ -41,7 +61,7 @@ function Cart(){
                 <img style={{width:"200px"}} src={cartProduct.product.image_url} alt={cartProduct.product.name} />
                 <h2>{cartProduct.product.name}</h2>
                 <p>Quantity: {cartProduct.quantity}</p>
-                <button>Delete</button>
+                <button onClick={() => deleteFromCart(cartProduct.id)}>Delete</button>
             </div>
             ))}
     </div>
