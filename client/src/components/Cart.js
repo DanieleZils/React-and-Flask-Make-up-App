@@ -82,6 +82,7 @@ function updateQuantity(cartProductId, newQuantity) {
                     cart_products: updatedCartProducts,
                 };
             }); 
+        alert('Quantity updated successfully');
         }
     })
     .catch((error) => console.log(error));
