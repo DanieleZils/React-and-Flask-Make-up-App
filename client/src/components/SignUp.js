@@ -31,7 +31,10 @@ const Signup = () => {
           }),
         })
             .then(handleErrors)
-            .then((user) => setUser(user))
+            .then((user) => {
+                setUser(user);
+                localStorage.setItem("user", JSON.stringify(user));
+              })
             .catch(error => console.log("Validation Error: Ensure all fields are valid", error))
                 
         

@@ -8,11 +8,10 @@ const Navbar = () => {
   const { user, setUser } = useContext(UserContext);
 
   function handleLogoutClick() {
-      fetch("/logout", { method: "DELETE" }).then((r) => {
-          if (r.ok) {
-            setUser(null);
-          }
-        });
+      fetch("/logout", { method: "DELETE" }).then(() => {
+        setUser(null);
+        localStorage.removeItem("user"); // Remove user from localStorage
+      });
   }
 
 return (
