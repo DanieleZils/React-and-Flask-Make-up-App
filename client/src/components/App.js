@@ -9,6 +9,7 @@ import ProductCard from "./ProductCards";
 import Cart from "./Cart";
 import { UserContext, UserProvider } from "./UserContext";
 import ProductDetail from "./ProductDetail";
+import OrderComplete from "./OrderComplete";
 
 function App() {
   const { user, setUser } = useContext(UserContext);
@@ -51,6 +52,7 @@ function App() {
         <Route path="/products"element={<Products productCards={productCards} />} />
         <Route path="/products/:id" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path = "/order-complete" element={<OrderComplete />}/>
       </Routes>
     </>
   );

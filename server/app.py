@@ -120,11 +120,15 @@ api.add_resource(ProductById, '/products/<int:id>')
 class CartResource(Resource):
     def get(self):
         user = db.session.get(User, session.get('user_id'))
-        if user and user.cart:
-            # Get the latest cart for the user
-            latest_cart = user.cart[-1]
-            return make_response(latest_cart.to_dict(), 200)
+        is_ordered = request.args.get('is_ordered', default = False, type = str)
+
+        if user :
+            is_ordered_value = is_ordered.lower() == 'true'
+            cart = Cart.query.filter_by(user_id=user.id, is_ordered=is_ordered_value).first()
+            if cart:
+                return make_response(cart.to_dict(), 200)
         return make_response({"error": "No cart found"}, 404)
+        
 
     def post(self):
         data = request.get_json()
@@ -209,10 +213,16 @@ class OrderResource(Resource):
     def post(self):
         user_id = session.get('user_id')
         if user_id:
+            user = db.session.get(User, user_id)
             cart = Cart.query.filter_by(user_id=user_id, is_ordered=False).first()
             if cart:
                 try:
                     cart.is_ordered = True
+                    db.session.commit()
+
+                    #create new empty cart to the user
+                    new_cart = Cart(user=user, is_ordered=False)
+                    db.session.add(new_cart)
                     db.session.commit()
                     return make_response(cart.to_dict(), 200)
                 except IntegrityError:

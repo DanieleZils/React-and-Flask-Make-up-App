@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { UserContext } from './UserContext';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -8,10 +9,12 @@ function Cart(){
     const { user } = useContext(UserContext);
     const [ cart, setCart ] = useState({ cart_products : []});
 
+    const navigate = useNavigate();
+
 
     useEffect(() => {
         if (user){
-            fetch('/cart')
+            fetch('/cart?is_ordered=false')
                 .then((r) => r.json())
                 .then((data) => setCart(data))
                 .catch((error) => console.log(error));
@@ -93,9 +96,13 @@ function calculateSubtotal(cartProduct){
 
 //this calculates the total for all products in the cart
 function calculateTotal(){
+    if (!cart.cart_products){
+        return 0;
+    } else {
     return cart.cart_products.reduce((total, cartProduct) => {
         return total + calculateSubtotal(cartProduct);
     }, 0);
+}
 }
 
 //this function will post to the orders table and change the is_ordered to true/it will also delete the cart_products from the cart
@@ -112,14 +119,15 @@ function checkout(){
     .then((response) => response.json())
     .then((data) => {
         if (!data.error){
+            // console.log("Emptying the cart");
             setCart({cart_products: []});
-            alert('Checkout successful');   
+            navigate('/order-complete');   
         } else {
             alert('Checkout failed');
         }
     })
     .catch((error) => console.log(error));
-    }
+}
     
 
 
