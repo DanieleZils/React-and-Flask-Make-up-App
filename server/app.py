@@ -126,6 +126,9 @@ class CartResource(Resource):
             is_ordered_value = is_ordered.lower() == 'true'
             cart = Cart.query.filter_by(user_id=user.id, is_ordered=is_ordered_value).first()
             if cart:
+                #fetch related cart_products
+                cart_products = CartProduct.query.filter_by(cart_id=cart.id).all()
+                cart.cart_products = cart_products
                 return make_response(cart.to_dict(), 200)
         return make_response({"error": "No cart found"}, 404)
         

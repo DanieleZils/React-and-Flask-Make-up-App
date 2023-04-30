@@ -61,16 +61,19 @@ class Cart(db.Model, SerializerMixin):
     cart_products = db.relationship('CartProduct', backref='cart')
     products = association_proxy('cart_products', 'product')
 
+    
     def to_dict(self):
-        return {
-            'id': self.id,
-            'user_id': self.user_id,
-            'is_ordered': self.is_ordered,
-            'created_at': self.created_at,
-            'updated_at': self.updated_at,
-            'cart_products': [cart_product.to_dict() for cart_product in self.cart_products],
-            'product_quantities': {cart_product.product.id: cart_product.quantity for cart_product in self.cart_products}
-            }
+        cart_dict = {
+        'id': self.id,
+        'user_id': self.user_id,
+        'is_ordered': self.is_ordered,
+        'created_at': self.created_at,
+        'updated_at': self.updated_at,
+        'product_quantities': {cart_product.product.id: cart_product.quantity for cart_product in self.cart_products}
+    }
+        if hasattr(self, 'cart_products'):
+            cart_dict['cart_products'] = [cp.to_dict() for cp in self.cart_products]
+        return cart_dict
    
 class Product(db.Model, SerializerMixin):
     __tablename__ = 'products'

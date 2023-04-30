@@ -28,10 +28,10 @@ with app.app_context():
     # Add products to carts
     cart_product1 = CartProduct(cart=cart1, product=product1, quantity=1)
     cart_product2 = CartProduct(cart=cart1, product=product2, quantity=1)
-    cart_product3 = CartProduct(cart=cart2, product=product2, quantity=2)
+    
 
     # Add instances to the session
-    db.session.add_all([user1, user2, product1, product2, cart1, cart2, cart_product1, cart_product2, cart_product3])
+    db.session.add_all([user1, user2, product1, product2, cart1, cart2, cart_product1, cart_product2])
 
     # Commit the session to persist the data in the database
     db.session.commit()
