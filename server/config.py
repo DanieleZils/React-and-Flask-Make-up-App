@@ -5,7 +5,15 @@ from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
 from flask_bcrypt import Bcrypt
+import stripe 
+from dotenv import load_dotenv
+import os
 
+
+load_dotenv()
+
+stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
+stripe_publishable_key = os.getenv("STRIPE_PUBLISHABLE_KEY")
 # Local imports
 
 # Instantiate app, set attributes
@@ -29,3 +37,5 @@ api = Api(app)
 CORS(app)
 
 bcrypt = Bcrypt(app)
+
+

@@ -3,6 +3,8 @@ from sqlalchemy.orm import Session
 from flask_migrate import Migrate
 from flask_restful import Api, Resource
 from sqlalchemy.exc import IntegrityError
+import stripe
+import os
 
 # Local imports
 from config import app
