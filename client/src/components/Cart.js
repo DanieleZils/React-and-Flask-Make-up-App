@@ -119,7 +119,6 @@ function checkout(){
     .then((response) => response.json())
     .then((data) => {
         if (!data.error){
-            // console.log("Emptying the cart");
             setCart({cart_products: []});
             navigate('/order-complete');   
         } else {

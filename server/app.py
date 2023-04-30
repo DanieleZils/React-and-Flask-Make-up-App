@@ -218,6 +218,9 @@ class OrderResource(Resource):
             if cart:
                 try:
                     cart.is_ordered = True
+                     # Delete cart_products associated with the cart
+                    CartProduct.query.filter_by(cart_id=cart.id).delete()
+
                     db.session.commit()
 
                     #create new empty cart to the user
