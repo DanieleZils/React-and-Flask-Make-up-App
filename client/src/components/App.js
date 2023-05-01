@@ -1,7 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
 import Home from "./Home";
 import Navbar from "./NavBar";
 import Signup from "./SignUp";
@@ -22,19 +20,7 @@ function App() {
 
   // state:
   const [products, setProducts] = useState([]);
-  const [stripePublishableKey, setStripePublishableKey] = useState("");
-  const [stripePromise, setStripePromise] = useState(null);
-
-  useEffect(() => {
-    // Fetch the Stripe publishable key from the server
-    fetch("/stripe_publishable_key")
-      .then((response) => response.json())
-      .then((data) => {
-        setStripePublishableKey(data.stripe_publishable_key);
-        setStripePromise(loadStripe(data.stripe_publishable_key));
-      });
-
-  }, []);
+  
 
   useEffect(() => {
     // auto-login
@@ -64,8 +50,6 @@ function App() {
   return (
     <>
       <Navbar />
-        {stripePublishableKey && (
-        <Elements stripe={stripePromise}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
@@ -76,8 +60,6 @@ function App() {
           <Route path = "/order-complete" element={<OrderComplete />}/>
           <Route path = "/cancel" element={<OrderCancelled />}/>
         </Routes>
-      </Elements>
-      )}
     </>
   );
 }

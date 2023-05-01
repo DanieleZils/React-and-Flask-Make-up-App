@@ -1,13 +1,86 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { UserContext } from './UserContext';
 import { useNavigate } from 'react-router-dom';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
+
+
+
+
+function StripeCheckoutForm({checkout, calculateTotal}){
+
+    const stripe = useStripe();
+    const elements = useElements();
+
+
+
+    async function handleStripeCheckout(event) {
+        event.preventDefault();
+
+        if (!stripe || !elements) {
+        return;
+        }
+
+        const cardElement = elements.getElement(CardElement);
+
+        const { error, paymentMethod } = await stripe.createPaymentMethod({
+        type: 'card',
+        card: cardElement,
+        });
+
+        if (error) {
+        console.log('[error]', error);
+        } else {
+        // Call your server to confirm the payment
+        const response = await fetch('/create-checkout-session', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+            price_id: 'price_1N2mGfJ9jje2jtwO08dAlMOS'
+            }),
+        });
+
+        const data = await response.json();
+
+        if (data.error) {
+        // Handle server-side error
+        console.log('[error]', data.error);
+        } else {
+        // Redirect to checkout page
+        const { error } = await stripe.redirectToCheckout({
+            sessionId: data.id,
+        });
+
+        if (error) {
+            // Handle client-side error
+            console.log('[error]', error);
+        }
+        }
+    }
+  }
+  return (
+    <form onSubmit={handleStripeCheckout}>
+      <CardElement />
+      <button type="submit" disabled={!stripe}>
+        Pay
+      </button>
+    </form>
+  );
+}
 
 
 function Cart(){
 
     const { user } = useContext(UserContext);
     const [ cart, setCart ] = useState({ cart_products : []});
+    const [showStripeForm, setShowStripeForm] = useState(false);
+
+    const [ publishableKey, setPublishableKey ] = useState(null);
+
+    const stripePromise = publishableKey && loadStripe(publishableKey);
 
     const navigate = useNavigate();
 
@@ -21,6 +94,18 @@ function Cart(){
         }
     },[user]);
 
+    useEffect(() => {
+        async function fetchPublishableKey() {
+          try {
+            const response = await fetch('/stripe_publishable_key');
+            const data = await response.json();
+            setPublishableKey(data.stripe_publishable_key)
+          } catch (error) {
+            console.log(error);
+          }
+        }
+        fetchPublishableKey();
+      }, []);    
 
 
      
@@ -127,13 +212,14 @@ function checkout(){
     })
     .catch((error) => console.log(error));
 }
-    
-
-
+    function handleCheckoutClick(){
+        setShowStripeForm((prevState) => !prevState);
+    }
 
 
 if (!user) {
     return <p>You must be logged in to view your cart.</p>;}
+
 
 return (
     <div>
@@ -155,12 +241,18 @@ return (
             </div>
             ))}
             <p>Total: ${calculateTotal(cart.cart_products).toFixed(2)}</p>
-            {cart?.cart_products?.length > 0 && (
-      <button onClick={checkout}>Checkout</button>
-    )}
-    </div>
-  );
-
-}
+            {cart?.cart_products?.length > 0 && stripePromise && (
+            <>
+               <button onClick={handleCheckoutClick} style={{ backgroundColor: 'blue', color: 'white', padding: '10px', marginTop: '10px', cursor: 'pointer' }}>Checkout</button>
+                {showStripeForm && (
+                <Elements stripe={stripePromise}>
+                     <StripeCheckoutForm calculateTotal={calculateTotal} checkout={checkout}/>
+                </Elements>
+                )}
+            </>
+            )}
+            </div>
+            );
+        }
 
 export default Cart;

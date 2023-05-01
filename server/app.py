@@ -19,20 +19,21 @@ api = Api(app)
 def create_checkout_session():
     data = request.get_json()
     # Replace the 'price_xxx' with your actual Price ID from your Stripe Dashboard
-    price_id = data.get("price_1N2mGfJ9jje2jtwO08dAlMOS")
+   
 
     try:
         checkout_session = stripe.checkout.Session.create(
             payment_method_types=["card"],
             line_items=[
                 {
-                    "price": price_id,
-                    "quantity": 1
+                    "price": "price_1N2mGfJ9jje2jtwO08dAlMOS",
+                    "quantity": 1,
+
                 }
             ],
             mode="payment",
-            success_url="http://127.0.0.1:5555/order-complete?session_id={CHECKOUT_SESSION_ID}",
-            cancel_url="http://127.0.0.1:5555/cancel"
+            success_url="http://localhost:3000/order-complete?session_id={CHECKOUT_SESSION_ID}",
+            cancel_url="http://localhost:3000/cancel"
         )
         return jsonify({"id": checkout_session.id})
     except Exception as e:
