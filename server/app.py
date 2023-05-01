@@ -18,17 +18,22 @@ api = Api(app)
 @app.route("/create-checkout-session", methods=["POST"])
 def create_checkout_session():
     data = request.get_json()
-    # Replace the 'price_xxx' with your actual Price ID from your Stripe Dashboard
-   
+    amount = data.get("amount")
+    currency = data.get("currency")
 
     try:
         checkout_session = stripe.checkout.Session.create(
             payment_method_types=["card"],
             line_items=[
                 {
-                    "price": "price_1N2mGfJ9jje2jtwO08dAlMOS",
+                    "price_data": {
+                        "currency": currency,
+                        "unit_amount": amount,
+                        "product_data": {
+                            "name": "Cart total"
+                        },
+                    },
                     "quantity": 1,
-
                 }
             ],
             mode="payment",
@@ -38,6 +43,9 @@ def create_checkout_session():
         return jsonify({"id": checkout_session.id})
     except Exception as e:
         return jsonify({"error": str(e)}), 400
+
+
+    
     
 @app.route("/stripe_publishable_key")
 def get_stripe_publishable_key():
