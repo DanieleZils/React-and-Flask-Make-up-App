@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import Home from "./Home";
 import Navbar from "./NavBar";
 import Signup from "./SignUp";
@@ -10,12 +12,29 @@ import Cart from "./Cart";
 import { UserContext, UserProvider } from "./UserContext";
 import ProductDetail from "./ProductDetail";
 import OrderComplete from "./OrderComplete";
+import OrderCancelled from "./Cancel";
+
+
 
 function App() {
-  const { user, setUser } = useContext(UserContext);
+
+  const { setUser } = useContext(UserContext);
 
   // state:
   const [products, setProducts] = useState([]);
+  const [stripePublishableKey, setStripePublishableKey] = useState("");
+  const [stripePromise, setStripePromise] = useState(null);
+
+  useEffect(() => {
+    // Fetch the Stripe publishable key from the server
+    fetch("/stripe_publishable_key")
+      .then((response) => response.json())
+      .then((data) => {
+        setStripePublishableKey(data.stripe_publishable_key);
+        setStripePromise(loadStripe(data.stripe_publishable_key));
+      });
+
+  }, []);
 
   useEffect(() => {
     // auto-login
@@ -32,7 +51,7 @@ function App() {
         }
       });
     }
-  }, []);
+  }, [setUser]);
 
   useEffect(() => {
     fetch("/products").then((r) => r.json()).then(setProducts);
@@ -45,15 +64,20 @@ function App() {
   return (
     <>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/products"element={<Products productCards={productCards} />} />
-        <Route path="/products/:id" element={<ProductDetail />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path = "/order-complete" element={<OrderComplete />}/>
-      </Routes>
+        {stripePublishableKey && (
+        <Elements stripe={stripePromise}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/products"element={<Products productCards={productCards} />} />
+          <Route path="/products/:id" element={<ProductDetail />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path = "/order-complete" element={<OrderComplete />}/>
+          <Route path = "/cancel" element={<OrderCancelled />}/>
+        </Routes>
+      </Elements>
+      )}
     </>
   );
 }
