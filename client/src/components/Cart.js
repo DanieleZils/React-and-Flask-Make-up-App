@@ -8,70 +8,71 @@ import { Elements, useStripe } from '@stripe/react-stripe-js';
 
 
 
-function StripeCheckoutForm({ checkout, calculateTotal, cart}){
+// function StripeCheckoutForm({ checkout, calculateTotal, cart}){
 
-    const stripe = useStripe();
+//     const stripe = useStripe();
     
 
 
 
-    async function handleStripeCheckout(event) {
-        event.preventDefault();
+//     async function handleStripeCheckout(event) {
+//         event.preventDefault();
       
-        if (!stripe ) {
-          return;
-        }
+//         if (!stripe ) {
+//           return;
+//         }
       
-          // Calculate the total amount in the smallest currency unit (e.g., cents for USD)
-          const totalAmount = calculateTotal() * 100;
+//           // Calculate the total amount in the smallest currency unit (e.g., cents for USD)
+//           const totalAmount = calculateTotal() * 100;
       
-          const response = await fetch("/create-checkout-session", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              amount: totalAmount,
-              currency: "usd", // Replace with the desired currency
-            }),
+//           const response = await fetch("/create-checkout-session", {
+//             method: "POST",
+//             headers: {
+//               "Content-Type": "application/json",
+//             },
+//             body: JSON.stringify({
+//               amount: totalAmount,
+//               currency: "usd", // Replace with the desired currency
+//             }),
             
-          });
+//           });
 
-            const data = await response.json();
+//             const data = await response.json();
 
-            if (data.error) {
-            // Handle server-side error
-            console.log('[error]', data.error);
-            } else {
-            // Redirect to checkout page
-            const { error } = await stripe.redirectToCheckout({
-                sessionId: data.id,
-            });
-            if (error) {
-                // Handle client-side error
-                console.log('[error]', error);
-            } 
-        }
-}
-  return (
-    <form onSubmit={handleStripeCheckout}>
-      <button type="submit" disabled={!stripe}>
-        Pay
-      </button>
-    </form>
-  );
-}
+//             if (data.error) {
+//             // Handle server-side error
+//             console.log('[error]', data.error);
+//             } else {
+//             // Redirect to checkout page
+//             const { error } = await stripe.redirectToCheckout({
+//                 sessionId: data.id,
+//             });
+//             if (error) {
+//                 // Handle client-side error
+//                 console.log('[error]', error);
+//             } 
+//         }
+// }
+//   return (
+//     <form onSubmit={handleStripeCheckout}>
+//       <button type="submit" disabled={!stripe}>
+//         Pay
+//       </button>
+//     </form>
+//   );
+// }
 
 
 function Cart(){
 
     const { user } = useContext(UserContext);
     const [ cart, setCart ] = useState({ cart_products : []});
-    const [showStripeForm, setShowStripeForm] = useState(false);
+   
 
     const [ publishableKey, setPublishableKey ] = useState(null);
 
     const stripePromise = publishableKey && loadStripe(publishableKey);
+
 
     const navigate = useNavigate();
 
@@ -182,7 +183,7 @@ function calculateTotal(){
 }
 
 //this function will post to the orders table and change the is_ordered to true/it will also delete the cart_products from the cart
-function checkout(){
+function checkout(callback){
     fetch('/order', {
         method: "POST",
         headers : {
@@ -195,22 +196,57 @@ function checkout(){
     .then((response) => response.json())
     .then((data) => {
         if (!data.error){
-            setCart({cart_products: []});
-            navigate('/order-complete');   
+            setCart({cart_products: []}); 
+            navigate("/loading")
+            callback(); 
         } else {
             alert('Checkout failed');
         }
     })
     .catch((error) => console.log(error));
 }
-    function handleCheckoutClick(){
-        setShowStripeForm((prevState) => !prevState);
-        
+async function handleStripeCheckout() {
+    if (!publishableKey) {
+      return;
     }
+
+    const stripe = await loadStripe(publishableKey);
+
+    // Calculate the total amount in the smallest currency unit (e.g., cents for USD)
+    const totalAmount = calculateTotal() * 100;
+
+    const response = await fetch("/create-checkout-session", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        amount: totalAmount,
+        currency: "usd", // Replace with the desired currency
+      }),
+    });
+
+    const data = await response.json();
+
+    if (data.error) {
+      // Handle server-side error
+      console.log('[error]', data.error);
+    } else {
+      // Redirect to checkout page
+      const { error } = await stripe.redirectToCheckout({
+        sessionId: data.id,
+      });
+      if (error) {
+        // Handle client-side error
+        console.log('[error]', error);
+      } 
+    }
+  }
 
 
 if (!user) {
-    return <p>You must be logged in to view your cart.</p>;}
+    return <p>You must be logged in to view your cart.</p>; 
+}
 
 
 return (
@@ -235,12 +271,8 @@ return (
             <p>Total: ${calculateTotal(cart.cart_products).toFixed(2)}</p>
             {cart?.cart_products?.length > 0 && stripePromise && (
             <>
-               <button onClick={handleCheckoutClick} style={{ backgroundColor: 'blue', color: 'white', padding: '10px', marginTop: '10px', cursor: 'pointer' }}>Checkout</button>
-                {showStripeForm && (
-                <Elements stripe={stripePromise}>
-                     <StripeCheckoutForm calculateTotal={calculateTotal} cart={cart} checkout={checkout} />
-                </Elements>
-                )}
+               <button onClick={()=> {checkout(handleStripeCheckout)}} style={{ backgroundColor: 'blue', color: 'white', padding: '10px', marginTop: '10px', cursor: 'pointer' }}>Checkout</button>
+              
             </>
             )}
             </div>

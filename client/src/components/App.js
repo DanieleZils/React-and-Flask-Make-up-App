@@ -11,6 +11,7 @@ import { UserContext, UserProvider } from "./UserContext";
 import ProductDetail from "./ProductDetail";
 import OrderComplete from "./OrderComplete";
 import OrderCancelled from "./Cancel";
+import Loading from "./Loading";
 
 
 
@@ -59,6 +60,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path = "/order-complete" element={<OrderComplete />}/>
           <Route path = "/cancel" element={<OrderCancelled />}/>
+          <Route path = "/loading" element={<Loading />}/>
         </Routes>
     </>
   );
