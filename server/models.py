@@ -86,6 +86,7 @@ class Product(db.Model, SerializerMixin):
     description = db.Column(db.String)
     price = db.Column(db.Float, nullable = False)
     image_url = db.Column(db.String, nullable=False)
+    is_featured = db.Column(db.Boolean, default=False)
 
     cart_products = db.relationship('CartProduct', backref = 'product')
     carts = association_proxy('cart_products', 'cart')
