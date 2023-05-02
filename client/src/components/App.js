@@ -13,6 +13,9 @@ import OrderComplete from "./OrderComplete";
 import OrderCancelled from "./Cancel";
 import Loading from "./Loading";
 import FeaturedProducts from "./FeaturedProducts";
+import LipMakeup from "./LipMakeup";
+import EyeMakeup from "./EyeMakeup";
+import FaceMakeup from "./FaceMakeup";
 
 
 
@@ -63,6 +66,10 @@ function App() {
           <Route path = "/cancel" element={<OrderCancelled />}/>
           <Route path = "/loading" element={<Loading />}/>
           <Route path="/featured-products" element={<FeaturedProducts />} />
+          <Route path="/lip" element={<LipMakeup />}/>
+          <Route path="/eye" element={<EyeMakeup />}/>
+          <Route path="/face" element={<FaceMakeup />}/>
+
         </Routes>
     </>
   );
