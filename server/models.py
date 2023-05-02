@@ -91,8 +91,16 @@ class Product(db.Model, SerializerMixin):
     cart_products = db.relationship('CartProduct', backref = 'product')
     carts = association_proxy('cart_products', 'cart')
 
-    def __repr__(self):
-        return f'<Product {self.name}>'
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'category': self.category,
+            'description': self.description,
+            'price': self.price,
+            'image_url': self.image_url,
+            'is_featured': self.is_featured
+        }
     
 
 class CartProduct(db.Model, SerializerMixin):

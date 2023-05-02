@@ -140,7 +140,7 @@ class Products(Resource):
             products = Product.query.all()
             return make_response([product.to_dict() for product in products], 200)
         except Exception as e:
-            return make_response({"error": str(e)}, 500)
+            return make_response({"error": str(e)}, 404)
 
 api.add_resource(Products, '/products')
 
@@ -152,10 +152,53 @@ class ProductById(Resource):
                 return make_response(product.to_dict(), 200)
             return make_response({"error": "Product not found"}, 404)
         except Exception as e:
-            return make_response({"error": str(e)}, 500)
+            return make_response({"error": str(e)}, 400)
 
 api.add_resource(ProductById, '/products/<int:id>')
 
+class FeaturedProducts(Resource):
+    def get(self):
+        try:
+            products = Product.query.filter_by(is_featured=True).all()
+            return make_response([product.to_dict() for product in products], 200)
+        except Exception as e:
+            return make_response({"error": str(e)}, 500)
+
+api.add_resource(FeaturedProducts, '/featured-products')
+
+class LipMakeup(Resource):
+
+    def get(self):
+        try:
+            products = Product.query.filter_by(category='lip').all()
+            return make_response([product.to_dict() for product in products], 200)
+        except Exception as e:
+            return make_response({"error": str(e)}, 400)
+        
+api.add_resource(LipMakeup, '/lip')
+
+class EyeMakeup(Resource):
+
+    def get(self):
+
+        try:
+            products = Product.query.filter_by(category='eye').all()
+            return make_response([product.to_dict() for product in products], 200)
+        except Exception as e:
+            return make_response({"error": str(e)}, 400)
+        
+api.add_resource(EyeMakeup, '/eye')
+
+class FaceMakeup(Resource):
+
+    def get(self):
+        try:
+            products = Product.query.filter_by(category='face').all()
+            return make_response([product.to_dict() for product in products], 200)
+        except Exception as e:
+            return make_response({"error": str(e)}, 400)
+
+api.add_resource(FaceMakeup, '/face')
 
 class CartResource(Resource):
     def get(self):

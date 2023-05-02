@@ -1,12 +1,15 @@
 import React from "react";
+import FeaturedProducts from "./FeaturedProducts";
 
 
 
 function Home(){
 
     return (
-        <div>
-            <h1>Hello From Home</h1>
+        <div className="homeFeat">
+           <h2 style={{fontFamily:"Roboto"}}>Featured Products</h2>
+            <FeaturedProducts />
+           
         </div>
     )
 }

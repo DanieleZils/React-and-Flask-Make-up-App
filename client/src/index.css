@@ -54,3 +54,24 @@ code {
 
 
 }
+
+.featProduct{
+
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap; 
+
+
+
+}
+
+
+.featProductImg {
+  margin-right: 10px;
+}
+
+.featProductImg img {
+  max-width: 100%;
+  height: auto;
+}
+

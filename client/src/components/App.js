@@ -12,6 +12,7 @@ import ProductDetail from "./ProductDetail";
 import OrderComplete from "./OrderComplete";
 import OrderCancelled from "./Cancel";
 import Loading from "./Loading";
+import FeaturedProducts from "./FeaturedProducts";
 
 
 
@@ -61,6 +62,7 @@ function App() {
           <Route path = "/order-complete" element={<OrderComplete />}/>
           <Route path = "/cancel" element={<OrderCancelled />}/>
           <Route path = "/loading" element={<Loading />}/>
+          <Route path="/featured-products" element={<FeaturedProducts />} />
         </Routes>
     </>
   );
