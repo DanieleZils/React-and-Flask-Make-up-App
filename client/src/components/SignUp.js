@@ -1,5 +1,6 @@
 import React, {useContext, useState} from "react";
 import { UserContext } from './UserContext';
+import { useNavigate } from "react-router-dom";
 
 
 // pass setUser from App
@@ -8,6 +9,8 @@ const Signup = () => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
+    const navigate = useNavigate();
   
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -34,6 +37,7 @@ const Signup = () => {
             .then((user) => {
                 setUser(user);
                 localStorage.setItem("user", JSON.stringify(user));
+                navigate("/");
               })
             .catch(error => console.log("Validation Error: Ensure all fields are valid", error))
                 

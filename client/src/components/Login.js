@@ -1,11 +1,14 @@
 import React, { useState, useContext} from "react";
 import { UserContext } from './UserContext';
+import { useNavigate } from "react-router-dom";
 
 function Login() {
     const { setUser } = useContext(UserContext);
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+
+    const navigate = useNavigate();
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -33,6 +36,7 @@ function Login() {
             .then((user) => {
                 setUser(user);
                 localStorage.setItem("user", JSON.stringify(user));
+                navigate("/");
               })
             .catch(error => console.log("Validation Error: Ensure all fields are valid", error))
                 
