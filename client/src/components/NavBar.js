@@ -24,10 +24,10 @@ const Navbar = () => {
   return (
     <nav className="navBar">
       <div>
-        <Link to="/">Home</Link>
+        <Link to="/" className='navLink'>Home</Link>
       </div>
       <div className="dropdown">
-        <Link to="/products">Products</Link>
+        <Link to="/products" className='navLink'>Products</Link>
         <div className="dropdown-content">
           {categories.map((category) => (
             <Link key={category.name} to={category.path}>
@@ -44,11 +44,11 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            <Link to="/signup">Signup </Link>
-            <Link to="/login">Login </Link>
+            <Link to="/signup" className='navLink'>Signup </Link>
+            <Link to="/login" className='navLink'>Login </Link>
           </>
         )}
-        <Link to="/cart"> Cart </Link>
+        <Link to="/cart" className='navLink'> Cart </Link>
       </div>
     </nav>
   );

@@ -20,6 +20,7 @@ code {
   margin-bottom: 50px;
   background: bisque;
   height: 100px;
+ 
   
 
 }
@@ -97,9 +98,34 @@ code {
 }
 
 .dropdown-content a:hover {
-  background-color: #ddd;
+  background-color: lightcoral;
 }
 
 .dropdown:hover .dropdown-content {
   display: block;
+}
+
+.navLink {
+  color: #333;
+  text-decoration: none;
+  margin-right: 1rem;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.navLink:hover {
+  color: lightcoral;
+  text-decoration: underline;
+}
+
+/* Style the dropdown links */
+.dropdown-content .navLink {
+  text-decoration: none;
+  font-weight: normal;
+  margin-right: 0;
+}
+
+.dropdown-content .navLink:hover {
+  background-color: #ddd;
+  text-decoration: none;
 }
