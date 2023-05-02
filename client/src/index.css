@@ -28,17 +28,29 @@ code {
 
   width: 285px;
   height:300px;
-  display:flex;
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
   padding-bottom: 15px;
+  padding: 15px;
+  margin: 20px;
+  object-fit: cover;
 
 }
 
 .productCard h3, h4 {
 
-  margin-bottom: 5px;
-  margin-top: 5px;
   justify-self: center;
   color: black;
+  text-align: center;
 }
 
+.productList{
+
+  background-color: bisque;
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: 10px;
+  justify-content: center;
+
+
+}

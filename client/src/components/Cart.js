@@ -7,62 +7,6 @@ import { Elements, useStripe } from '@stripe/react-stripe-js';
 
 
 
-
-// function StripeCheckoutForm({ checkout, calculateTotal, cart}){
-
-//     const stripe = useStripe();
-    
-
-
-
-//     async function handleStripeCheckout(event) {
-//         event.preventDefault();
-      
-//         if (!stripe ) {
-//           return;
-//         }
-      
-//           // Calculate the total amount in the smallest currency unit (e.g., cents for USD)
-//           const totalAmount = calculateTotal() * 100;
-      
-//           const response = await fetch("/create-checkout-session", {
-//             method: "POST",
-//             headers: {
-//               "Content-Type": "application/json",
-//             },
-//             body: JSON.stringify({
-//               amount: totalAmount,
-//               currency: "usd", // Replace with the desired currency
-//             }),
-            
-//           });
-
-//             const data = await response.json();
-
-//             if (data.error) {
-//             // Handle server-side error
-//             console.log('[error]', data.error);
-//             } else {
-//             // Redirect to checkout page
-//             const { error } = await stripe.redirectToCheckout({
-//                 sessionId: data.id,
-//             });
-//             if (error) {
-//                 // Handle client-side error
-//                 console.log('[error]', error);
-//             } 
-//         }
-// }
-//   return (
-//     <form onSubmit={handleStripeCheckout}>
-//       <button type="submit" disabled={!stripe}>
-//         Pay
-//       </button>
-//     </form>
-//   );
-// }
-
-
 function Cart(){
 
     const { user } = useContext(UserContext);
