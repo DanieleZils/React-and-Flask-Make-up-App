@@ -17,12 +17,26 @@ code {
 
   display: flex;
   justify-content: right;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   background: bisque;
-  height: 100px;
+  height: 150px;
+  padding: 0 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+
  
   
 
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+}
+
+.logo img {
+  height: 300px;
+  margin-right: 1000px;
+  margin-top: -50px;
 }
 
 .productCard img {
@@ -136,8 +150,9 @@ code {
   color: #333;
   text-decoration: none;
   margin-right: 1rem;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
+  align-items: center;
 }
 
 .navLink:hover {

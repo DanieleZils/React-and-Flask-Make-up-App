@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from './UserContext';
+import logo from '../assets/logo2.png';
 
 
 const categories = [
@@ -23,6 +24,9 @@ const Navbar = () => {
 
   return (
     <nav className="navBar">
+      <div className='logo'>
+        <img src={logo} alt="logo" />
+      </div>
       <div>
         <Link to="/" className='navLink'>Home</Link>
       </div>
