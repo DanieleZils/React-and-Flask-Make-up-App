@@ -3,6 +3,7 @@ import { UserContext } from './UserContext';
 import { useNavigate } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, useStripe } from '@stripe/react-stripe-js';
+import Receipt from './Receipt';
 
 
 
@@ -11,6 +12,9 @@ function Cart(){
 
     const { user } = useContext(UserContext);
     const [ cart, setCart ] = useState({ cart_products : []});
+    const [showReceipt, setShowReceipt] = useState(false);
+    const [showCheckoutButton, setShowCheckoutButton] = useState(false);
+
    
 
     const [ publishableKey, setPublishableKey ] = useState(null);
@@ -187,6 +191,11 @@ async function handleStripeCheckout() {
     }
   }
 
+  function reviewOrder() {
+    setShowReceipt(true);
+    setShowCheckoutButton(true);
+  }
+
 
 if (!user) {
     return <p>You must be logged in to view your cart.</p>; 
@@ -215,12 +224,28 @@ return (
             <p>Total: ${calculateTotal(cart.cart_products).toFixed(2)}</p>
             {cart?.cart_products?.length > 0 && stripePromise && (
             <>
-               <button onClick={()=> {checkout(handleStripeCheckout)}} style={{ backgroundColor: 'blue', color: 'white', padding: '10px', marginTop: '10px', cursor: 'pointer' }}>Checkout</button>
-              
-            </>
+            {!showReceipt ? (
+              <button
+                onClick={reviewOrder}
+              >
+                Review Order
+              </button>
+            ) : (
+              <>
+                <Receipt cartProducts={cart.cart_products} total={calculateTotal(cart.cart_products)} user={user} />
+                {showCheckoutButton && (
+                  <button
+                    onClick={() => { checkout(handleStripeCheckout); }}
+                  >
+                    Checkout
+                  </button>
+                )}
+              </>
             )}
-            </div>
-            );
-        }
+          </>
+        )}
+      </div>
+    );
+}
     
 export default Cart;
