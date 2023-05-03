@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { UserContext } from './UserContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link} from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
-import { Elements, useStripe } from '@stripe/react-stripe-js';
 import Receipt from './Receipt';
 
 
@@ -207,7 +206,9 @@ return (
         <h1>Your Cart</h1>
          {cart?.cart_products?.map((cartProduct) => (
             <div key={cartProduct.id}>
+                <Link to={`/products/${cartProduct.product.id}`}>
                 <img style={{width:"200px"}} src={cartProduct.product.image_url} alt={cartProduct.product.name} />
+                </Link>
                 <h2>{cartProduct.product.name}</h2>
                 <p>Quantity: {cartProduct.quantity}</p>
                 <p>Price: ${cartProduct.product.price}</p>

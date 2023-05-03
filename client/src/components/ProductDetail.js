@@ -1,7 +1,6 @@
 import React, {useState, useEffect, useContext} from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { UserContext } from "./UserContext";
-
 
 function ProductDetail(){
 
@@ -46,7 +45,9 @@ function ProductDetail(){
     return (
         <div className="productDetail">
             <div className="pDetailImg">
+                <Link to="/products">
                 <img style={{width:"200px"}} src={product.image_url} alt={product.name}/>
+                </Link>
             </div>
             <div className="pInfo">
                 <h2>{product.name}</h2>
