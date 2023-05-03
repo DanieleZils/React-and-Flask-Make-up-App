@@ -13,8 +13,7 @@ function EyeMakeup() {
   }, []);
 
   return (
-    <div>
-      <h1>Eye Makeup</h1>
+    <div className="eyeDiv">
       {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}

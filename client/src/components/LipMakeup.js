@@ -13,8 +13,7 @@ function LipMakeup() {
   }, []);
 
   return (
-    <div>
-      <h1>Lip Makeup</h1>
+    <div className="lipDiv">
       {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}

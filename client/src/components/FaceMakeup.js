@@ -13,8 +13,7 @@ function FaceMakeup() {
   }, []);
 
   return (
-    <div>
-      <h1>Face Makeup</h1>
+    <div className="faceDiv">
       {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}

@@ -66,7 +66,34 @@ code {
 
 }
 
+.faceDiv {
 
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: bisque;
+
+}
+
+/*  */
+
+.lipDiv {
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: bisque;
+
+}
+
+.eyeDiv {
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: bisque;
+
+}
 .featProductImg {
   margin-right: 10px;
 }
