@@ -158,7 +158,7 @@ button {
   font-size: 18px;
   font-weight: 500;
   margin-right: 5px;
-  
+
   
 }
 
@@ -177,5 +177,57 @@ button {
 .dropdown-content .navLink:hover {
   background-color: #ddd;
   text-decoration: none;
+}
+
+
+.form-container {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+
+  width:400px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);;
+  
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 24px;
+  font-family: sans-serif;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+label {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+/* Form Input */
+input {
+  padding: 6px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-top: 10px;
+
+}
+
+/* Form Input - Focus */
+input:focus {
+  outline: none;
+  border-color: #4b7bec;
 }
 

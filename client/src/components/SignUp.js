@@ -51,44 +51,54 @@ const Signup = () => {
     }
   
     return (
-      <div>
+      <div className="form-container">
         <form onSubmit={handleSubmit}>
           <h1>Sign Up</h1>
-          <label htmlFor="first_name">First Name</label>
+          <div className="form-group">
+          <label htmlFor="first_name">First Name : </label>
           <input
             type="text"
             placeholder="First Name"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
           />
-          <label htmlFor="last_name">Last Name</label>
+          </div>
+          <div>
+          <label htmlFor="last_name">Last Name : </label>
           <input
             type="text"
             placeholder="Last Name"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
           />
-          <label htmlFor="email">Email</label>
+          </div>
+          <div>
+          <label htmlFor="email">Email : </label>
           <input
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <label htmlFor="username">Username</label>
+          </div>
+          <div>
+          <label htmlFor="username">Username : </label>
           <input
             type="text"
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-          <label htmlFor="password">Password</label>
+          </div>
+          <div>
+          <label htmlFor="password">Password : </label>
           <input
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          </div>
           <button type="submit">Sign Up</button>
         </form>
       </div>
