@@ -1,9 +1,9 @@
 import React, { useState, useContext} from "react";
 import { UserContext } from './UserContext';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function Login() {
-    const { setUser } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -42,6 +42,8 @@ function Login() {
                 
     }
 
+ 
+ 
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit}>
@@ -65,9 +67,13 @@ function Login() {
         />
         </div>
         <button type="submit">Login</button>
+        <p>
+          New to Pure Glow? <Link to="/signup"> Signup Here! </Link>
+        </p>
       </form>
     </div>
   );
+
 }
 
 export default Login;
