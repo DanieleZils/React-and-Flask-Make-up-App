@@ -5,6 +5,7 @@ from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.hybrid import hybrid_property
 
+
 from config import db, bcrypt
 
 
@@ -16,11 +17,14 @@ class User(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, unique=True, nullable=False)
     _password_hash = db.Column(db.String, nullable=False)
+    email = db.Column(db.String, unique=True, nullable=False)
+    first_name = db.Column(db.String, nullable=False)
+    last_name = db.Column(db.String, nullable=False)
 
     cart = db.relationship('Cart', backref='user')
     products = association_proxy('cart', 'product')
 
-    
+
     @hybrid_property
     def password_hash(self):
         return self._password_hash
@@ -33,14 +37,30 @@ class User(db.Model, SerializerMixin):
             password.encode('utf-8'))
         self._password_hash = password_hash.decode('utf-8')
 
+
     def authenticate(self, password):
         return bcrypt.check_password_hash(
             self._password_hash, password.encode('utf-8'))
 
+    
     @validates('username')
     def validate_username(self, key, value):
         if len(value) < 4:
             raise ValueError("Username must be at least 4 characters long.")
+        return value
+    
+    
+    @validates('email')
+    def validate_email(self, key, value):
+        if "@" not in value or not value.endswith(".com"):
+            raise ValueError("Invalid email address.")
+        return value
+    
+    
+    @validates('first_name', 'last_name')
+    def validate_name(self, key, value):
+        if len(value) < 1:
+            raise ValueError(f"{key.capitalize()} must not be empty.")
         return value
 
     def __repr__(self):

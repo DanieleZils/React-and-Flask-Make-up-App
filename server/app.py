@@ -65,7 +65,12 @@ class Signup(Resource):
         data = request.get_json()
 
         try:
-            new_user = User(username=data['username'])
+            new_user = User(
+                username=data['username'],
+                email=data['email'],
+                first_name=data['firstName'],
+                last_name=data['lastName']
+                )
             new_user.password_hash = data['password']
             db.session.add(new_user)
             db.session.commit()

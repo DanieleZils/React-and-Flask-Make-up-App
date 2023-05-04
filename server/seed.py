@@ -14,8 +14,8 @@ with app.app_context():
 
 
         # Create users
-    user1 = User(username="john_doe", password_hash="password123")
-    user2 = User(username="jane_doe", password_hash="password123")
+    user1 = User(username="john_doe", password_hash="password123", email="john@example.com", first_name="John", last_name="Doe")
+    user2 = User(username="jane_doe", password_hash="password123", email="jane@example.com", first_name="Jane", last_name="Doe")
 
     # Create products
     p1 = Product(name="Lipstick", category="lip", description="Introducing Scarlet Bloom, our all-natural red lipstick that will leave you feeling bold and beautiful! Made with only the finest organic ingredients, Scarlet Bloom is the perfect combination of luxurious and eco-friendly.Crafted with nourishing coconut oil, shea butter, and vitamin E, this lipstick provides intense hydration to keep your lips looking and feeling smooth all day long. The vibrant shade of red is derived from natural pigments, ensuring that your lips look stunning without any harmful synthetic dyes.Not only is Scarlet Bloom kind to your skin, but it's also environmentally conscious. The packaging is made from biodegradable materials, so you can feel good about your purchase knowing that you're minimizing your carbon footprint.Say goodbye to harsh chemicals and hello to naturally beautiful lips with Scarlet Bloom.", price=9.99, image_url="https://th.bing.com/th/id/OIG.NUg97X8XZQY2XMlPjdTv?w=270&h=270&c=6&r=0&o=5&dpr=2&pid=ImgGn", is_featured=True)

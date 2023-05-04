@@ -9,6 +9,9 @@ const Signup = () => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
 
     const navigate = useNavigate();
   
@@ -30,7 +33,10 @@ const Signup = () => {
           },
           body: JSON.stringify({
             username,
-            password
+            password,
+            email, 
+            firstName,
+            lastName
           }),
         })
             .then(handleErrors)
@@ -45,27 +51,49 @@ const Signup = () => {
     }
   
     return (
-    <div>
+      <div>
         <form onSubmit={handleSubmit}>
-            <h1>Sign Up</h1>
-            <label htmlFor="username">Username</label>
-            <input
+          <h1>Sign Up</h1>
+          <label htmlFor="first_name">First Name</label>
+          <input
+            type="text"
+            placeholder="First Name"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+          <label htmlFor="last_name">Last Name</label>
+          <input
+            type="text"
+            placeholder="Last Name"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <label htmlFor="username">Username</label>
+          <input
             type="text"
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            />
-            <label htmlFor="password">Password</label>
-            <input
+          />
+          <label htmlFor="password">Password</label>
+          <input
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            />
-            <button type="submit">Sign Up</button>
+          />
+          <button type="submit">Sign Up</button>
         </form>
-    </div>
-    )
+      </div>
+    );
+    
   };
   
   export default Signup;
