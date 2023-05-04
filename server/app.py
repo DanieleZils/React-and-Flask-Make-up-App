@@ -290,6 +290,7 @@ class CartResource(Resource):
         cart_product = CartProduct.query.filter_by(id=cart_product_id).first()
         if cart_product:
             try:
+                #i don't need this
                 db.session.delete(cart_product)
                 db.session.commit()
                 return make_response({}, 204)
