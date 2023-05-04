@@ -144,12 +144,26 @@ button {
   display: block;
 }
 
+
+
 .dropdown-content a:hover {
-  background-color: lightcoral;
+  background-color: lightgrey;
 }
 
 .dropdown:hover .dropdown-content {
   display: block;
+}
+
+.dropdown-login .dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-size: medium;
+}
+
+.dropdown-login .dropdown-content a:hover {
+  background-color: lightgrey;
 }
 
 .navLink {
@@ -218,7 +232,7 @@ label {
 /* Form Input */
 input {
   padding: 6px;
-  font-size: 16px;
+  font-size: 15px;
   border: 1px solid #ccc;
   border-radius: 3px;
   margin-top: 10px;
@@ -229,5 +243,24 @@ input {
 input:focus {
   outline: none;
   border-color: #4b7bec;
+}
+
+button {
+  width: 40%;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color:grey;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 16px;
+
+}
+
+/* Form Button - Hover */
+button:hover {
+  background-color: dimgray;
 }
 

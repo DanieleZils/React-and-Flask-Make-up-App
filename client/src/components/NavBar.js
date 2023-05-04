@@ -50,8 +50,12 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            <Link to="/signup" className='navLink'>Signup </Link>
+           <div className='dropdown dropdown-login'>
             <Link to="/login" className='navLink'>Login </Link>
+              <div className='dropdown-content'>
+                <Link to="/signup" className='navLink'> Signup </Link>
+              </div>
+            </div>
           </>
         )}
         <Link to="/cart" className='navLink'> Cart </Link>
