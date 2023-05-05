@@ -334,7 +334,14 @@ class PastOrdersResource(Resource):
         user = db.session.get(User, user_id)
 
         if user:
-            past_orders = Cart.query.filter_by(user_id=user_id, is_ordered=True).all()
+            if user:
+                query = Cart.query.filter_by(user_id=user_id, is_ordered=True)
+                last_order_only = request.args.get('last_order_only', default=False, type=bool)
+
+                if last_order_only:
+                    query = query.order_by(Cart.id.desc()).limit(1)
+
+                past_orders = query.all()
 
             for order in past_orders:
                 cart_products = CartProduct.query.filter_by(cart_id=order.id).all()
