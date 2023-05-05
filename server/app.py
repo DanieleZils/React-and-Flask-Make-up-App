@@ -290,7 +290,7 @@ class CartResource(Resource):
         cart_product = CartProduct.query.filter_by(id=cart_product_id).first()
         if cart_product:
             try:
-                #i don't need this
+               
                 db.session.delete(cart_product)
                 db.session.commit()
                 return make_response({}, 204)
@@ -310,9 +310,6 @@ class OrderResource(Resource):
             if cart:
                 try:
                     cart.is_ordered = True
-                     # Delete cart_products associated with the cart
-                    CartProduct.query.filter_by(cart_id=cart.id).delete()
-
                     db.session.commit()
 
                     #create new empty cart to the user

@@ -51,7 +51,6 @@ function ProductDetail(){
             </div>
             <div className="pInfo">
                 <h2>{product.name}</h2>
-                <h3>{product.category}</h3>
                 <h3> ${product.price} </h3>
                 <button className="addToCart" onClick={addToCart}>Add to Cart </button>
             </div>
