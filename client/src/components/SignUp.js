@@ -64,13 +64,13 @@ const Signup = () => {
   
     return (
       <div className="form-container">
-        {errors.map((error, index) => (
+        <form onSubmit={handleSubmit}>
+          <h1>Sign Up</h1>
+          {errors.map((error, index) => (
           <div key={index} className="error-message">
             {error}
           </div>
-        ))}
-        <form onSubmit={handleSubmit}>
-          <h1>Sign Up</h1>
+          ))}
           <div className="form-group">
           <label htmlFor="first_name">First Name</label>
           <input
