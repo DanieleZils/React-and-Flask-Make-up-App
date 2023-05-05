@@ -12,46 +12,63 @@ const Signup = () => {
     const [email, setEmail] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    const [errors, setErrors] = useState([]);
 
     const navigate = useNavigate();
   
     const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        function handleErrors(response) {
-            if (!response.ok) {
-                window.alert("Error: Ensure all fields are valid");
-                throw Error(response.statusText)
-            }
-            return response.json();
+      e.preventDefault();
+    
+      async function handleErrors(response) {
+        if (!response.ok) {
+          return { errorData: await response.json(), isError: true };
         }
-
-        fetch("/signup", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            username,
-            password,
-            email, 
-            firstName,
-            lastName
-          }),
+        return { data: await response.json(), isError: false };
+      }
+    
+      fetch("/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username,
+          password,
+          email,
+          firstName,
+          lastName,
+        }),
+      })
+        .then(handleErrors)
+        .then((result) => {
+          if (result.isError) {
+            const errorData = result.errorData;
+            if (errorData.error) {
+              setErrors([errorData.error]);
+            } else if (errorData.errors) {
+              setErrors(errorData.errors);
+            } else {
+              setErrors(["Unexpected error occurred"]);
+            }
+          } else {
+            const user = result.data;
+            setUser(user);
+            localStorage.setItem("user", JSON.stringify(user));
+            navigate("/");
+          }
         })
-            .then(handleErrors)
-            .then((user) => {
-                setUser(user);
-                localStorage.setItem("user", JSON.stringify(user));
-                navigate("/");
-              })
-            .catch(error => console.log("Validation Error: Ensure all fields are valid", error))
-                
-        
-    }
+        .catch((error) => {
+          setErrors(["An error occurred. Please try again later."]);
+        });
+    };
   
     return (
       <div className="form-container">
+        {errors.map((error, index) => (
+          <div key={index} className="error-message">
+            {error}
+          </div>
+        ))}
         <form onSubmit={handleSubmit}>
           <h1>Sign Up</h1>
           <div className="form-group">
