@@ -60,7 +60,7 @@ class User(db.Model, SerializerMixin):
     @validates('first_name', 'last_name')
     def validate_name(self, key, value):
         if len(value) < 1:
-            raise ValueError(f"{key.capitalize()} must not be empty.")
+            raise ValueError(f"Please provide first and last name.")
         return value
 
     def __repr__(self):
