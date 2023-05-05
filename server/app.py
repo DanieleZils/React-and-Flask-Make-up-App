@@ -326,5 +326,25 @@ class OrderResource(Resource):
 api.add_resource(OrderResource, '/order')
 
 
+class PastOrdersResource(Resource):
+
+    def get(self):
+
+        user_id = session.get('user_id')
+        user = db.session.get(User, user_id)
+
+        if user:
+            past_orders = Cart.query.filter_by(user_id=user_id, is_ordered=True).all()
+
+            for order in past_orders:
+                cart_products = CartProduct.query.filter_by(cart_id=order.id).all()
+                order.cart_products = cart_products
+
+            return make_response([order.to_dict() for order in past_orders], 200)
+        return make_response({"error": "User not found"}, 404)
+    
+api.add_resource(PastOrdersResource, '/past-orders')
+                
+
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

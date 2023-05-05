@@ -16,6 +16,7 @@ import FeaturedProducts from "./FeaturedProducts";
 import LipMakeup from "./LipMakeup";
 import EyeMakeup from "./EyeMakeup";
 import FaceMakeup from "./FaceMakeup";
+import PastOrders from "./PastOrders";
 
 
 
@@ -69,7 +70,7 @@ function App() {
           <Route path="/lip" element={<LipMakeup />}/>
           <Route path="/eye" element={<EyeMakeup />}/>
           <Route path="/face" element={<FaceMakeup />}/>
-
+          <Route path="/past-orders" element={<PastOrders />} />
         </Routes>
     </>
   );

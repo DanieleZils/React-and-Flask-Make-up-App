@@ -58,7 +58,14 @@ const Navbar = () => {
             </div>
           </>
         )}
+        <div className='dropdown'>
         <Link to="/cart" className='navLink'> Cart </Link>
+         {user && (
+           <div className='dropdown-content'>
+            <Link to="/past-orders" className='navLink'> Order History </Link>
+            </div>   
+            )}
+      </div>
       </div>
     </nav>
   );
