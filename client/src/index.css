@@ -279,3 +279,22 @@ button:hover {
   padding: 0.5em;
  
 }
+
+.embla {
+  overflow: hidden;
+}
+.embla__container {
+  display: flex;
+}
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+
+.embla__slide img {
+ 
+ width: 40%;
+ align-content: center;
+ 
+
+}
