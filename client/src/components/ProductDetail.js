@@ -5,10 +5,13 @@ import { UserContext } from "./UserContext";
 function ProductDetail(){
 
     const [product, setProductDetail] = useState("")
+    const [showAlert, setShowAlert] = useState(false)
 
     const { id } = useParams()
     const navigate = useNavigate();
     const { user } = useContext(UserContext);
+
+
 
     useEffect(() => {
         fetch(`/products/${id}`)
@@ -19,10 +22,14 @@ function ProductDetail(){
     //i need to add a function that posts the product to the cart of the user, and then redirects to the cart page
     //only looged in users can add to cart
 
+    function handleLoginPrompt() {
+        setShowAlert(true);
+      }
+
     function addToCart(){
         if (!user){
-            alert ("Please login to add items to cart.");
-            navigate("/login");
+            handleLoginPrompt();
+            navigate("/login", { state: { fromProductDetail: true } });
         } else {
         fetch("/cart", {
             method: "POST",
@@ -41,6 +48,7 @@ function ProductDetail(){
                 }
             })}
     }
+      
 
     
 return (
@@ -62,8 +70,8 @@ return (
                 Add to Cart
             </button>
             </div>
-        </div>
-        <div className="w-full mt-16">
+            </div>
+            <div className="w-full mt-16">
             <div className="description w-1/2 mx-auto">
             <h2 className="h2 text-2xl font-bold mb-4">About the Product:</h2>
             <p className="text-lg ">{product.description}</p>

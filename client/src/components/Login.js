@@ -1,12 +1,16 @@
 import React, { useState, useContext} from "react";
 import { UserContext } from './UserContext';
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
+
 
 function Login() {
     const { user, setUser } = useContext(UserContext);
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+
+    const location = useLocation();
+    const fromProductDetail = location.state?.fromProductDetail || false;
 
     const navigate = useNavigate();
 
@@ -49,6 +53,11 @@ function Login() {
 <div className="min-h-screen flex items-start pt-20 justify-center glassy-bg ">
     <div className="w-full max-w-md p-8 bg-white bg-opacity-60 backdrop-blur-md rounded-lg shadow-lg">
       <form onSubmit={handleSubmit} className="space-y-6">
+           {fromProductDetail && (
+              <p className="mt-4 text-red-600 font-bold">
+                Please login to Shop!
+              </p>
+            )}
         <h1 className="text-3xl font-bold text-center">Login</h1>
         <div className="space-y-2">
           <label htmlFor="username" className="block text-l font-medium">
