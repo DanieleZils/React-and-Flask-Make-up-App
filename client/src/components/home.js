@@ -3,7 +3,7 @@ import FeaturedProducts from "./FeaturedProducts";
 import Hero from "./Hero";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
-
+import CarouselComponent from './Carousel'
 
 
 function Home(){
@@ -11,7 +11,7 @@ function Home(){
     return (
     <div className="glassy-bg">
         <div className="hero">
-            <Hero/>
+            <CarouselComponent/>
         </div>
         <div className="flex flex-col items-center gap-4 py-20">
             <span className="w-32 h-[3px] bg-black"></span>
