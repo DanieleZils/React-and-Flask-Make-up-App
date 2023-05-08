@@ -40,16 +40,22 @@ function FeaturedProducts() {
 
 
     useEffect(() => {
-        setRandomFeaturedProducts(getRandomElements(featuredProducts, 4));
+        setRandomFeaturedProducts(getRandomElements(featuredProducts, 8));
       }, [featuredProducts]);
     
       return (
         // map the random featured products to the page
-        <div className="featProduct">
+        <div className="flex gap-2 py-20">
           {randomFeaturedProducts.map((product) => (
-            <div key={product.id} className="featProductImg">
+            <div key={product.id} className="w-64 h-64 relative border border-gray-300 rounded-3xl">
               <Link to={`/products/${product.id}`}>
-                <img src={product.image_url} alt={product.name} />
+                <img className="w-full h-full object-cover absolute rounded-3xl" src={product.image_url} alt={product.name} />
+                <div className="absolute bottom-0 w-full h-1/3 bg-white rounded-b-3xl">
+                  <div className="flex flex-col justify-center items-center gap-2 h-full">
+                    <h1 className="text-xl font-bold">{product.name}</h1>
+                    <h2 className="text-lg font-bold">${product.price}</h2>
+                    </div>
+                </div>
               </Link>
             </div>
           ))}
