@@ -8,7 +8,7 @@ function Products({productCards}){
 
     return (
         <div>
-            <div className="productList">
+            <div className="glassy-bg">
                 {productCards}
             </div>
         </div>

@@ -13,7 +13,7 @@ function FaceMakeup() {
   }, []);
 
   return (
-    <div className="faceDiv">
+    <div className="glassy-bg">
       {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}

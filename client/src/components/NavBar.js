@@ -1,14 +1,15 @@
 import React, {useContext} from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from './UserContext';
-import logo from '../assets/logo.png';
+import logo from '../assets/logoblack.png';
+import {AiOutlineShoppingCart} from 'react-icons/ai';
 
 
 const categories = [
-  { name: "Face Makeup", path: "/face" },
-  { name: "Lip Makeup", path: "/lip" },
-  { name: "Eye Makeup", path: "/eye" },
-  { name: "All Products", path: "/products" },
+  { name: "Face", path: "/face" },
+  { name: "Lip", path: "/lip" },
+  { name: "Eye", path: "/eye" },
+  { name: "Products", path: "/products" },
 ];
 
 const Navbar = () => {
@@ -22,52 +23,80 @@ const Navbar = () => {
       });
   }
 
+  // w-full h-30 bg-white border-b-[1px] border-b-gray-800"
   return (
-    <nav className="navBar">
-      <div className='logo'>
-        <Link to="/">
-        <img src={logo} alt="logo" />
-        </Link>
-      </div>
-      <div>
-        <Link to="/" className='navLink'>Home</Link>
-      </div>
-      <div className="dropdown">
-        <Link to="/products" className='navLink'>Products</Link>
-        <div className="dropdown-content">
-          {categories.map((category) => (
-            <Link key={category.name} to={category.path}>
-              {category.name}
-            </Link>
-          ))}
+   <div className='glassy-bg'>
+    <nav className="w-full h-50 ">
+      <div className="h-full flex items-center justify-between px-8">
+        <div className="mx-4 w-52 ">
+          <Link to="/">
+            <img src={logo} alt="logo"  />
+          </Link>
         </div>
-      </div>
-      <div>
-        {user ? (
-          <>
-            <span> Welcome, {user.username}! </span>
-            <button onClick={handleLogoutClick}>Logout</button>
-          </>
-        ) : (
-          <>
-           <div className='dropdown dropdown-login'>
-            <Link to="/login" className='navLink'>Login </Link>
-              <div className='dropdown-content'>
-                <Link to="/signup" className='navLink'> Signup </Link>
+        <ul className="flex items-center gap-8">
+          <li>
+            <Link
+              to="/"
+              className="text-xl text-black font-bold hover:text-red-900 cursor-pointer duration-300 py-7 px-3 inline-block"
+            >
+              Home
+            </Link>
+          </li>
+          <li className="relative group">
+            <Link
+              to="/products"
+              className="text-xl text-black font-bold hover:text-red-900 cursor-pointer duration-300"
+            >
+              Products
+            </Link>
+            <div className="absolute left-0 mt-2 space-y-2 text-black text-xl my-auto rounded-md p-3 hidden bg-opacity-90 z-10">
+              {categories.map((category) => (
+              <div className="hover:text-red-900" key={category.name}>
+                <Link to={category.path}>
+                    {category.name}
+                </Link>
               </div>
+                ))}
             </div>
-          </>
-        )}
-        <div className='dropdown'>
-        <Link to="/cart" className='navLink'> Cart </Link>
-         {user && (
-           <div className='dropdown-content'>
-            <Link to="/past-orders" className='navLink'> Order History </Link>
-            </div>   
+          </li>
+          {user ? (
+            <>
+              <li>
+                <span className='text-xl'>Welcome, {user.username}!</span>
+              </li>
+              <li>
+                <button onClick={handleLogoutClick}>Logout</button>
+              </li>
+            </>
+          ) : (
+            <>
+              <li className="relative group">
+                <Link
+                  to="/login"
+                  className="text-xl text-black font-bold hover:text-red-900 cursor-pointer duration-300"
+                >
+                  Login
+                </Link>
+                <div className="absolute left-0 mt-2 space-y-2 text-black text-xl my-auto rounded-md p-3 hidden group-hover:block bg-opacity-90">
+                  <Link to="/signup">Signup</Link>
+                </div>
+              </li>
+            </>
+          )}
+          <li className="relative group">
+            <Link to="/cart" className="mx-4">
+              <AiOutlineShoppingCart className='text-2xl'/>
+            </Link>
+            {user && (
+              <div className="absolute left-0 mt-2 space-y-2 bg-white text-black border border-gray-200 rounded-md p-2 hidden group-hover:block">
+                <Link to="/past-orders">Order History</Link>
+              </div>
             )}
-      </div>
+          </li>
+        </ul>
       </div>
     </nav>
+  </div>
   );
 };
 

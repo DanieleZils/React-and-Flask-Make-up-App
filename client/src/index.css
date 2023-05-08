@@ -1,283 +1,35 @@
-body {
-  margin: 50px;;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+
+  --primary-dark: #6d2b3d;
+  --primary-light: #f7c2db;
 }
 
+@layer base {
+  html {
+    @apply scroll-smooth
+  }
+  body{
+    @apply font-[Sans-serif];
+  }
+  .glassy-bg {
+    background-image: linear-gradient(to right, rgba(109, 43, 61, 0.7), rgba(247, 194, 219, 0.7));
+  }
 
-
-button {
-
-  background-color: whitesmoke;
-  color: black;
-  font-weight: bold;
-  padding: 10px;
-  margin-top: 10px;
-  cursor: pointer;
-  border-radius: 5px;
+  li {
+    @apply p-4 text-sm
+  }
+  button {
+    @apply px-4 py-2 border bg-white text-black font-bold rounded-md shadow-lg
+  }
+  h2 {
+    @apply text-xl font-bold
+  }
 }
 
-
-.navBar {
-
-  display: flex;
-  justify-content: right;
-  margin-bottom: 30px;
-  background: bisque;
-  height: 150px;
-  padding: 10px 20px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-
-}
-
-.logo {
-  display: flex;
-  justify-content: center;
-}
-
-.logo img {
-  height: 250px;
-  margin-right: 1000px;
-  margin-top: -50px;
-}
-
-.productCard img {
-
-  width: 285px;
-  height:300px;
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 15px;
-  padding: 15px;
-  margin: 20px;
-  object-fit: cover;
-
-}
-
-.productCard h3, h4 {
-
-  justify-self: center;
-  color: black;
-  text-align: center;
-}
-
-.productList{
-
-  background-color: bisque;
-  display: flex;
-  flex-wrap: wrap;
-  padding-bottom: 10px;
-  justify-content: center;
-
-
-}
-
-.featProduct{
-
-  display: flex;
-  overflow-x: auto;
-  white-space: nowrap; 
-
-}
-
-.faceDiv {
-
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  background-color: bisque;
-
-}
-
-/*  */
-
-.lipDiv {
-
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  background-color: bisque;
-
-}
-
-.eyeDiv {
-
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  background-color: bisque;
-
-}
-.featProductImg {
-  margin-right: 10px;
-}
-
-.featProductImg img {
-  max-width: 100%;
-  height: auto;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
+.relative:hover .hidden {
   display: block;
 }
-
-
-
-.dropdown-content a:hover {
-  background-color: lightgrey;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-.dropdown-login .dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  font-size: medium;
-}
-
-.dropdown-login .dropdown-content a:hover {
-  background-color: lightgrey;
-}
-
-.navLink {
-  color: #333;
-  text-decoration: none;
-  font-size: 18px;
-  font-weight: 500;
-  margin-right: 10px;
-
-  
-}
-
-.navLink:hover {
-  color: lightcoral;
-  text-decoration: underline;
-}
-
-/* Style the dropdown links */
-.dropdown-content .navLink {
-  text-decoration: none;
-  font-weight: normal;
-  margin-right: 0;
-}
-
-.dropdown-content .navLink:hover {
-  background-color: #ddd;
-  text-decoration: none;
-}
-
-
-.form-container {
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-form {
-
-  width:400px;
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  
-}
-
-h1 {
-  text-align: center;
-  margin-bottom: 24px;
-  font-size: 24px;
-  font-family: sans-serif;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 16px;
-}
-
-label {
-  font-size: 16px;
-  margin-bottom: 8px;
-}
-
-/* Form Input */
-input {
-  padding: 6px;
-  font-size: 15px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  margin-top: 10px;
-
-}
-
-/* Form Input - Focus */
-input:focus {
-  outline: none;
-  border-color: #4b7bec;
-}
-
-button {
-  
-  width: 40%;
-  padding: 10px;
-  font-size: 16px;
-  font-weight: bold;
-  color: white;
-  background-color:grey;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  margin-top: 16px;
-  
-
-}
-
-
-
-/* Form Button - Hover */
-button:hover {
-  background-color: dimgray;
-}
-
-.ordercompletediv {
-
-  display: flex;
-  justify-content: center;
-  margin-top: 100px;
-  margin-bottom: 100px;
-}
-
-.error-message {
-  color: red;
-  margin: 0.5em 0;
-  padding: 0.5em;
- 
-}
-
-
