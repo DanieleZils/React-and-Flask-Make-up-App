@@ -14,9 +14,9 @@ function Home(){
             <Hero/>
         </div>
         <div className="flex flex-col items-center gap-4 py-20">
-            <span className="w-32 h-[4px] bg-black"></span>
-            <h1 className="text-4xl font-bold py-20">Best Sellers</h1>
-            <span className="w-32 h-[4px] bg-black"></span>
+            <span className="w-32 h-[3px] bg-black"></span>
+            <h1 className="text-3xl font-bold py-8">Best Sellers</h1>
+            <span className="w-32 h-[3px] bg-black"></span>
             <FeaturedProducts/>
         </div>
         <div>

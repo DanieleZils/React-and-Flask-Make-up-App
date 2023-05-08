@@ -26,7 +26,7 @@ const Navbar = () => {
   // w-full h-30 bg-white border-b-[1px] border-b-gray-800"
   return (
    <div className='glassy-bg'>
-    <nav className="w-full h-50 ">
+    <nav className="w-full h-30 border-b-2 border-gray-700 ">
       <div className="h-full flex items-center justify-between px-8">
         <div className="mx-4 w-52 ">
           <Link to="/">
@@ -37,7 +37,7 @@ const Navbar = () => {
           <li>
             <Link
               to="/"
-              className="text-xl text-black font-bold hover:text-red-900 cursor-pointer duration-300 py-7 px-3 inline-block"
+              className="text-2xl text-black font-bold hover:text-red-900 cursor-pointer duration-300 py-7 px-3 inline-block"
             >
               Home
             </Link>
@@ -45,7 +45,7 @@ const Navbar = () => {
           <li className="relative group">
             <Link
               to="/products"
-              className="text-xl text-black font-bold hover:text-red-900 cursor-pointer duration-300"
+              className="text-2xl text-black font-bold hover:text-red-900 cursor-pointer duration-300"
             >
               Products
             </Link>
@@ -73,11 +73,11 @@ const Navbar = () => {
               <li className="relative group">
                 <Link
                   to="/login"
-                  className="text-xl text-black font-bold hover:text-red-900 cursor-pointer duration-300"
+                  className="text-2xl text-black font-bold hover:text-red-900 cursor-pointer duration-300"
                 >
                   Login
                 </Link>
-                <div className="absolute left-0 mt-2 space-y-2 text-black text-xl my-auto rounded-md p-3 hidden group-hover:block bg-opacity-90">
+                <div className="absolute left-0 mt-2 space-y-2 text-black text-xl my-auto rounded-md p-3 hidden group-hover:block bg-opacity-90 hover:text-red-900">
                   <Link to="/signup">Signup</Link>
                 </div>
               </li>
@@ -85,10 +85,10 @@ const Navbar = () => {
           )}
           <li className="relative group">
             <Link to="/cart" className="mx-4">
-              <AiOutlineShoppingCart className='text-2xl'/>
+              <AiOutlineShoppingCart className='text-3xl'/>
             </Link>
             {user && (
-              <div className="absolute left-0 mt-2 space-y-2 bg-white text-black border border-gray-200 rounded-md p-2 hidden group-hover:block">
+              <div className="absolute left-0 mt-2 space-y-2 text-black text-xl my-auto rounded-md p-3 hidden group-hover:block bg-opacity-90 hover:text-red-900">
                 <Link to="/past-orders">Order History</Link>
               </div>
             )}

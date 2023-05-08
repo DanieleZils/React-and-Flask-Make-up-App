@@ -49,11 +49,11 @@ function FeaturedProducts() {
           {randomFeaturedProducts.map((product) => (
             <div key={product.id} className="w-64 h-64 relative border border-gray-300 rounded-3xl">
               <Link to={`/products/${product.id}`}>
-                <img className="w-full h-full object-cover absolute rounded-3xl" src={product.image_url} alt={product.name} />
-                <div className="absolute bottom-0 w-full h-1/3 bg-white rounded-b-3xl">
+                <img className="w-full h-auto object-cover absolute rounded-3xl" src={product.image_url} alt={product.name} />
+                <div className="absolute bottom-0 w-full h-1/4 bg-white rounded-b-3xl border-t-2 border-gray-300">
                   <div className="flex flex-col justify-center items-center gap-2 h-full">
-                    <h1 className="text-xl font-bold">{product.name}</h1>
-                    <h2 className="text-lg font-bold">${product.price}</h2>
+                    <h1 className="text-l font-bold">{product.name}</h1>
+                    <h2 className="text-l font-bold">${product.price}</h2>
                     </div>
                 </div>
               </Link>
