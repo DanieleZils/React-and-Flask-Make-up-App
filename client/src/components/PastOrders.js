@@ -38,35 +38,36 @@ function calculateTotal(cartProducts) {
 }
 
 
-    return (
-        <div>
-          <h1>Past Orders</h1>
-          {pastOrders.length === 0 ? (
-            <p>No past orders found.</p>
-          ) : (
-            pastOrders.map((order, index) => (
-              <div key={index}>
-                <h2>Order #{order.id}</h2>
-                <ul>
-                  {order.cart_products.map((cartProduct) => (
-                    <div key={cartProduct.id}>
-                      <img src={cartProduct.product.image_url} alt={cartProduct.product.name} style={{height:"300px", width:"300px"}} />
-                      <br />
-                      <p>Order Date: {order.created_at}</p>
-                    <li>
-                      {cartProduct.product.name} - Quantity: {cartProduct.quantity}
-                      <br />
-                      Price: {cartProduct.product.price} - Subtotal: ${calculateSubtotal(cartProduct).toFixed(2)}
-                    </li>
-                    </div>
-                  ))}
-                </ul>
-                <h3>Total: ${calculateTotal(order.cart_products).toFixed(2)}</h3>
+return (
+  <div className="glassy-bg min-h-screen flex flex-col items-center pt-16">
+    <h1 className="text-3xl font-bold mb-8">Past Orders</h1>
+    {pastOrders.length === 0 ? (
+      <p>No past orders found.</p>
+    ) : (
+      pastOrders.map((order, index) => (
+        <div key={index} className="w-2/3 bg-white p-8 mb-8 rounded-3xl shadow-lg">
+          <h2 className="text-2xl font-bold mb-4">Order #{order.id}</h2>
+          <ul>
+            {order.cart_products.map((cartProduct) => (
+              <div key={cartProduct.id} className="flex items-center mb-4">
+                <img className="w-1/4 h-1/4 object-cover rounded-3xl mr-8" src={cartProduct.product.image_url} alt={cartProduct.product.name} />
+                <div>
+                  <p className="font-semibold">Order Date: {order.created_at}</p>
+                  <li className="font-semibold">
+                    {cartProduct.product.name} - Quantity: {cartProduct.quantity}
+                    <br />
+                    Price: ${cartProduct.product.price} - Subtotal: ${calculateSubtotal(cartProduct).toFixed(2)}
+                  </li>
+                </div>
               </div>
-            ))
-          )}
+            ))}
+          </ul>
+          <h3 className="text-xl font-semibold">Total: ${calculateTotal(order.cart_products).toFixed(2)}</h3>
         </div>
-      );
-    }
+      ))
+    )}
+  </div>
+);
+}
 
 export default PastOrders;

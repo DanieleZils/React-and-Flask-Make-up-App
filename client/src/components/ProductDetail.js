@@ -53,9 +53,9 @@ function ProductDetail(){
     
 return (
     <div className="glassy-bg min-h-screen flex justify-center items-start pt-32">
-        <div className="w-2/3 flex flex-col justify-around items-center">
-        <div className="flex justify-around items-center w-full">
-            <div className="w-1/3 rounded-2xl">
+        <div className="w-2/3 flex flex-col justify-around items-center bg-white p-8 mb-8 rounded-3xl shadow-lg">
+        <div className="flex justify-around items-center w-full ">
+            <div className="w-1/3 rounded-2xl ">
             <Link to="/products">
                 <img className="w-2/3 mx-auto rounded-2xl object-cover" src={product.image_url} alt={product.name} />
             </Link>
