@@ -46,36 +46,53 @@ function Login() {
  
   return (
 
-    <div className="form-container">
-      <form onSubmit={handleSubmit}>
-        <h1>Login</h1>
-        <div>
-        <label htmlFor="username">Username </label>
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
+<div className="min-h-screen flex items-start pt-20 justify-center glassy-bg ">
+    <div className="w-full max-w-md p-8 bg-white bg-opacity-60 backdrop-blur-md rounded-lg shadow-lg">
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <h1 className="text-3xl font-bold text-center">Login</h1>
+        <div className="space-y-2">
+          <label htmlFor="username" className="block text-l font-medium">
+            Username
+          </label>
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded-md"
+          />
         </div>
-        <div>
-        <label htmlFor="password"> Password </label>
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <div className="space-y-2">
+          <label htmlFor="password" className="block text-l font-medium">
+            Password
+          </label>
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded-md"
+          />
         </div>
-        <button type="submit">Login</button>
-        <p>
-          New to Pure Glow? <Link to="/signup"> Signup Here! </Link>
+        <button
+          type="submit"
+          className="w-full py-2 text-white bg-black rounded-md hover:opacity-60"
+        >
+          Login
+        </button>
+        <p className="text-sm text-center">
+          New to Pure Glow?{" "}
+          <Link
+            to="/signup"
+            className="text-[#6d2b3d] font-bold underline hover:text-black"
+          >
+            Signup Here!
+          </Link>
         </p>
       </form>
     </div>
-
-  );
-
+  </div>
+);
 }
 
 export default Login;

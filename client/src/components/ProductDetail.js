@@ -42,23 +42,38 @@ function ProductDetail(){
             })}
     }
 
-    return (
-        <div className="productDetail">
-            <div className="pDetailImg">
-                <Link to="/products">
-                <img style={{width:"200px"}} src={product.image_url} alt={product.name}/>
-                </Link>
+    
+return (
+    <div className="glassy-bg min-h-screen flex justify-center items-start pt-32">
+        <div className="w-2/3 flex flex-col justify-around items-center">
+        <div className="flex justify-around items-center w-full">
+            <div className="w-1/3 rounded-2xl">
+            <Link to="/products">
+                <img className="w-2/3 mx-auto rounded-2xl object-cover" src={product.image_url} alt={product.name} />
+            </Link>
             </div>
-            <div className="pInfo">
-                <h2>{product.name}</h2>
-                <h3> ${product.price} </h3>
-                <button className="addToCart" onClick={addToCart}>Add to Cart </button>
+            <div className="w-1/3">
+            <h2 className="text-2xl font-bold mb-2">{product.name}</h2>
+            <h3 className="text-xl font-semibold mb-4"> ${product.price} </h3>
+            <button
+                className="addToCart px-4 py-2 bg-white text-black font-bold rounded-md shadow-lg hover:text-red-900 cursor-pointer duration-300"
+                onClick={addToCart}
+            >
+                Add to Cart
+            </button>
             </div>
-            <br />
-            <h2 className="h2">About the Product: </h2>
-            <p className="description">{product.description}</p>
         </div>
-    )
+        <div className="w-full mt-16">
+            <div className="description w-1/2 mx-auto">
+            <h2 className="h2 text-2xl font-bold mb-4">About the Product:</h2>
+            <p className="text-lg ">{product.description}</p>
+            </div>
+        </div>
+        </div>
+    </div>
+    );
 }
-
+    
+      
 export default ProductDetail;
+      
