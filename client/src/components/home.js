@@ -1,6 +1,5 @@
 import React from "react";
 import FeaturedProducts from "./FeaturedProducts";
-import Hero from "./Hero";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
 import CarouselComponent from './Carousel'

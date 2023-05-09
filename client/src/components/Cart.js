@@ -206,7 +206,7 @@ return (
     <div className="w-2/3 mx-auto flex flex-col justify-center items-center">
       <h1 className="text-2xl font-bold mb-8 justify-center">Your Cart</h1>
       {cart?.cart_products?.map((cartProduct) => (
-        <div key={cartProduct.id} className="w-2/3 bg-white p-8 mb-8 rounded-3xl shadow-lg flex justify-between items-center">
+        <div key={cartProduct.id} className="w-2/3  p-8 mb-8 rounded-3xl shadow-lg flex justify-between items-center">
           <Link to={`/products/${cartProduct.product.id}`}>
             <img className="w-1/2 h-auto object-cover rounded-md shadow-lg p-2" src={cartProduct.product.image_url} alt={cartProduct.product.name} />
           </Link>
@@ -223,7 +223,7 @@ return (
               onChange={(e) => updateQuantity(cartProduct.id, parseInt(e.target.value))}
             />
             <button
-              className="px-4 py-2 bg-white text-black font-bold rounded-md shadow-lg hover:text-red-900 cursor-pointer duration-300 ml-4"
+              className="px-4 py-2  text-black font-bold rounded-md shadow-lg hover:text-red-900 cursor-pointer duration-300 ml-4"
               onClick={() => deleteFromCart(cartProduct.id)}
             >
               Delete
@@ -243,7 +243,7 @@ return (
             </button>
           ) : (
             <>
-              <div className="mt-20">
+              <div className="mt-20 w-2/3 mx-auto flex flex-col justify-center items-center rounded-3xl p-8">
                 <Receipt cartProducts={cart.cart_products} total={calculateTotal(cart.cart_products)} user={user} />
 
                 {showCheckoutButton && (

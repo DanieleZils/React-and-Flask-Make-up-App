@@ -18,8 +18,6 @@ const Navbar = () => {
 
   const [dropdown, setDropdown] = useState(null);
 
-  
-
 
   function handleLogoutClick() {
       fetch("/logout", { method: "DELETE" }).then(() => {
@@ -70,7 +68,7 @@ const Navbar = () => {
                 Products
               </Link>
               {dropdown === 'products' && (
-              <div className="absolute left-0 mt-2 space-y-2 text-black text-xl my-auto rounded-md p-3 hidden bg-white shadow-md z-10">
+              <div className="absolute left-0 mt-2 space-y-2 text-black text-xl my-auto rounded-md p-3 hidden backdrop-blur-xl bg-white shadow-md z-10">
                 {categories.map((category) => (
                   <div className="hover:text-red-900" key={category.name}>
                     <Link to={category.path}>
@@ -111,6 +109,7 @@ const Navbar = () => {
                 </li>
               </>
             )}
+            {user ? (
             <li className="relative"
                 onMouseEnter={() => setDropdown('cart')}
                 onMouseLeave={() => setDropdown(null)}
@@ -124,6 +123,9 @@ const Navbar = () => {
                 </div>
               )}
             </li>
+            ) : (
+              null
+            )}
           </ul>
         </div>
       </nav>

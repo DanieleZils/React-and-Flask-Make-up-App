@@ -21,8 +21,8 @@ const CarouselComponent = () => {
         showArrows={true}
         infiniteLoop={true}
         autoPlay={true}
-        interval={3000}
-        transitionTime={900}
+        interval={5000}
+        transitionTime={800}
         swipeable={true}
         dynamicHeight={false}
         emulateTouch={true}
