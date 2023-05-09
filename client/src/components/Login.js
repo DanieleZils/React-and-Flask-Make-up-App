@@ -9,6 +9,7 @@ function Login() {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [errors, setErrors] = useState([]);
 
     const location = useLocation();
     const fromProductDetail = location.state?.fromProductDetail || false;
@@ -16,50 +17,66 @@ function Login() {
     const navigate = useNavigate();
 
     function handleSubmit(e) {
-        e.preventDefault();
-        
+      e.preventDefault();
+      
 
-        function handleErrors(response) {
-            if (!response.ok) {
-                window.alert("Error: Ensure all fields are valid");
-                throw Error(response.statusText)
-            }
-            return response.json();
+      async function handleErrors(response) {
+        if (!response.ok) {
+          return { errorData: await response.json(), isError: true };
         }
+        return { data: await response.json(), isError: false };
+      }
 
-        fetch("/login", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            username,
-            password
-        }),
+      fetch("/login", {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+          username,
+          password
+      }),
+      })
+        .then(handleErrors)
+        .then((result) => {
+          if (result.isError) {
+            const errorData = result.errorData;
+            if (errorData.error) {
+              setErrors([errorData.error]);
+            } else if (errorData.errors) {
+              setErrors(errorData.errors);
+            } else {
+              setErrors(["Unexpected error occurred"]);
+            }
+          } else {
+            const user = result.data;
+            setUser(user);
+            localStorage.setItem("user", JSON.stringify(user));
+            navigate("/");
+          }
         })
-            .then(handleErrors)
-            .then((user) => {
-                setUser(user);
-                localStorage.setItem("user", JSON.stringify(user));
-                navigate("/");
-              })
-            .catch(error => console.log("Validation Error: Ensure all fields are valid", error))
-                
-    }
+        .catch((error) => {
+          setErrors(["An error occurred. Please try again later."]);
+    });
+  };
 
  
- 
-  return (
+ return (
 <div className="min-h-screen flex flex-col glassy-bg">
  <div className="flex-grow flex items-start pt-20 justify-center">
     <div className="w-full max-w-md p-8 bg-white bg-opacity-60 backdrop-blur-md rounded-lg shadow-lg">
       <form onSubmit={handleSubmit} className="space-y-6">
            {fromProductDetail && (
               <p className="mt-4 text-red-600 font-bold">
-                Please login to Shop!
+                Please login to shop!
               </p>
             )}
         <h1 className="text-3xl font-bold text-center">Login</h1>
+        {errors.map((error, index) => (
+          <div key={index} className="text-red-600 font-bold">
+            {error}
+          </div>
+          ))}
         <div className="space-y-2">
           <label htmlFor="username" className="block text-l font-medium">
             Username
