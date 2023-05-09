@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "./ProductCards";
+import Footer from "./Footer";
 
 function FaceMakeup() {
   const [products, setProducts] = useState([]);
@@ -13,6 +14,7 @@ function FaceMakeup() {
   }, []);
 
   return (
+  <div>
     <div className="glassy-bg py-10 min-h-screen">
       <div className="max-w-screen-xl mx-auto py-10 grid grid-cols-4 gap-10">
       {products.map((product) => (
@@ -20,6 +22,8 @@ function FaceMakeup() {
       ))}
     </div>
   </div>
+  < Footer />
+</div>
   );
 }
 

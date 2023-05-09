@@ -3,7 +3,7 @@ import { UserContext } from './UserContext';
 import { useNavigate, Link} from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
 import Receipt from './Receipt';
-
+import Footer from './Footer';
 
 
 
@@ -201,6 +201,7 @@ if (!user) {
 }
 
 return (
+<div>
   <div className="glassy-bg min-h-screen pt-32">
     <div className="w-2/3 mx-auto flex flex-col justify-center items-center">
       <h1 className="text-2xl font-bold mb-8 justify-center">Your Cart</h1>
@@ -262,6 +263,8 @@ return (
       )}
     </div>
   </div>
+  < Footer />
+</div>
 );
 
 

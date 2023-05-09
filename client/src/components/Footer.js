@@ -5,11 +5,11 @@ import Gold from '../assets/gold.png';
 
 const Footer = () => {
     return (
-      <footer className="bg-stone-800 py-8">
+      <footer className="bg-stone-800 py-4">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap justify-between items-start">
             <div className="w-full md:w-1/2 mb-4 md:mb-0">
-              <img src={Gold} alt="logo" className="w-36 mb-4" />
+              <img src={Gold} alt="logo" className="w-36 mb-5" />
               <div>
                 <p className="text-white text-sm">
                   Clean makeup for a healthier, more radiant you.
@@ -17,7 +17,7 @@ const Footer = () => {
               </div>
             </div>
             <div className="w-full md:w-1/2 text-center md:text-right">
-              <ul className="flex flex-wrap justify-center md:justify-end mb-4 py-4">
+              <ul className="flex flex-wrap justify-center md:justify-end mb-24 my-3">
                 <li className="mx-2">
                   <a href="/" className="text-white hover:text-red-300">
                     Home
@@ -40,7 +40,7 @@ const Footer = () => {
                 </li>
               </ul>
               <div>
-                <p className="text-white text-sm py-16">
+                <p className="text-white text-sm">
                   &copy; {new Date().getFullYear()} Pure Glow. All rights reserved.
                 </p>
               </div>
@@ -50,6 +50,9 @@ const Footer = () => {
       </footer>
     );
   };
+  
+
+  
   
   export default Footer;
   

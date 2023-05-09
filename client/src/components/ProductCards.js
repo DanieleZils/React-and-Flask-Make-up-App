@@ -3,13 +3,14 @@ import {Link} from 'react-router-dom';
 
 
 
+
 function ProductCard({product}){
 
 
 
     return (
         <Link to={`/products/${product.id}`} className="group">
-         <div className="bg-white border border-gray-20 shadow-lg rounded-3xl overflow-hidden transition duration-300 transform group-hover:scale-105">
+         <div className="bg-white border border-gray-20 shadow-lg rounded-3xl overflow-hidden transition duration-300 transform group-hover:scale-110">
             <img
             className="w-full rounded-3xl object-cover object-center"
             src={product.image_url}

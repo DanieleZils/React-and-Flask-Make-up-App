@@ -1,6 +1,7 @@
 import React, { useState, useContext} from "react";
 import { UserContext } from './UserContext';
 import { useNavigate, Link, useLocation } from "react-router-dom";
+import Footer from "./Footer";
 
 
 function Login() {
@@ -49,8 +50,8 @@ function Login() {
  
  
   return (
-
-<div className="min-h-screen flex items-start pt-20 justify-center glassy-bg ">
+<div className="min-h-screen flex flex-col glassy-bg">
+ <div className="flex-grow flex items-start pt-20 justify-center">
     <div className="w-full max-w-md p-8 bg-white bg-opacity-60 backdrop-blur-md rounded-lg shadow-lg">
       <form onSubmit={handleSubmit} className="space-y-6">
            {fromProductDetail && (
@@ -101,6 +102,8 @@ function Login() {
       </form>
     </div>
   </div>
+  <Footer />
+</div>
 );
 }
 

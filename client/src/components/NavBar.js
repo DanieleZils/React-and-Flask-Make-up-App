@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from './UserContext';
-import logo from '../assets/logoblack.png';
+import gold from '../assets/gold.png';
 import {AiOutlineShoppingCart} from 'react-icons/ai';
 
 
@@ -25,19 +25,19 @@ const Navbar = () => {
 
   // w-full h-30 bg-white border-b-[1px] border-b-gray-800"
   return (
-   <div className='glassy-bg'>
-    <nav className="w-full h-30 border-b-2 border-gray-700 ">
-      <div className="h-full flex items-center justify-between px-8">
-        <div className="mx-4 w-52 ">
+   <div className='bg-stone-800 '>
+    <nav className="w-full h-28 border-b-2 border-gray-700 ">
+      <div className="h-full flex items-center justify-around px-32">
+        <div className="mx-4 w-40 ">
           <Link to="/">
-            <img src={logo} alt="logo"  />
+            <img src={gold} alt="logo"  />
           </Link>
         </div>
         <ul className="flex items-center gap-8">
           <li>
             <Link
               to="/"
-              className="text-2xl text-black font-bold hover:text-red-900 cursor-pointer duration-300 py-7 px-3 inline-block"
+              className="text-xl text-white font-bold hover:text-red-900 cursor-pointer duration-300 py-7 px-3 inline-block"
             >
               Home
             </Link>
@@ -45,7 +45,7 @@ const Navbar = () => {
           <li className="relative group">
             <Link
               to="/products"
-              className="text-2xl text-black font-bold hover:text-red-900 cursor-pointer duration-300"
+              className="text-xl text-white font-bold hover:text-red-900 cursor-pointer duration-300"
             >
               Products
             </Link>
@@ -62,7 +62,7 @@ const Navbar = () => {
           {user ? (
             <>
               <li>
-                <span className='text-xl'>Welcome, {user.username}!</span>
+                <span className='text-xl text-white'>Welcome, {user.username}!</span>
               </li>
               <li>
                 <button onClick={handleLogoutClick}>Logout</button>
@@ -73,7 +73,7 @@ const Navbar = () => {
               <li className="relative group">
                 <Link
                   to="/login"
-                  className="text-2xl text-black font-bold hover:text-red-900 cursor-pointer duration-300"
+                  className="text-xl text-white font-bold hover:text-red-900 cursor-pointer duration-300"
                 >
                   Login
                 </Link>
@@ -85,10 +85,10 @@ const Navbar = () => {
           )}
           <li className="relative group">
             <Link to="/cart" className="mx-4">
-              <AiOutlineShoppingCart className='text-3xl'/>
+              <AiOutlineShoppingCart className='text-3xl text-white'/>
             </Link>
             {user && (
-              <div className="absolute left-0 mt-2 space-y-2 text-black text-xl my-auto rounded-md p-3 hidden group-hover:block bg-opacity-90 hover:text-red-900">
+              <div className="absolute left-0 mt-2 space-y-2 text-white text-xl my-auto rounded-md p-3 hidden group-hover:block bg-opacity-90 hover:text-red-900">
                 <Link to="/past-orders">Order History</Link>
               </div>
             )}

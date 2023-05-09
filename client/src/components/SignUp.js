@@ -1,6 +1,7 @@
 import React, {useContext, useState} from "react";
 import { UserContext } from './UserContext';
 import { useNavigate } from "react-router-dom";
+import Footer from "./Footer";
 
 
 // pass setUser from App
@@ -63,6 +64,7 @@ const Signup = () => {
     };
   
     return (
+  <div>
     <div className="min-h-screen flex justify-center glassy-bg items-start pt-20">
       <div className="w-full max-w-md p-8 bg-white bg-opacity-60 backdrop-blur-md rounded-lg shadow-lg">
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -126,7 +128,9 @@ const Signup = () => {
           Sign Up</button>
         </form>
       </div>
-    </div>
+     </div>
+    <Footer />
+  </div>
     );
     
   };

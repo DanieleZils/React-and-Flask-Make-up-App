@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { UserContext } from './UserContext';
 import Receipt from './Receipt';
 
+
 function OrderComplete() {
   const { user } = useContext(UserContext);
   const [order, setOrder] = useState(null);

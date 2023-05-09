@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from './UserContext';
+import Footer from "./Footer";
 
 
 
@@ -39,6 +40,7 @@ function calculateTotal(cartProducts) {
 
 
 return (
+<div>
   <div className="glassy-bg min-h-screen flex flex-col items-center pt-16">
     <h1 className="text-3xl font-bold mb-8">Past Orders</h1>
     {pastOrders.length === 0 ? (
@@ -67,6 +69,8 @@ return (
       ))
     )}
   </div>
+  <Footer />
+</div>
 );
 }
 
