@@ -40,7 +40,7 @@ function FeaturedProducts() {
 
 
     useEffect(() => {
-        setRandomFeaturedProducts(getRandomElements(featuredProducts, 8));
+        setRandomFeaturedProducts(getRandomElements(featuredProducts, 6));
       }, [featuredProducts]);
     
       return (

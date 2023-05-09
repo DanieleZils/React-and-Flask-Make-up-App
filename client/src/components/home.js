@@ -10,7 +10,7 @@ function Home(){
 
     return (
     <div className="glassy-bg">
-        <div className="hero">
+        <div className="container mx-auto max-w-screen pt-16">
             <CarouselComponent/>
         </div>
         <div className="flex flex-col items-center gap-4 py-20">
