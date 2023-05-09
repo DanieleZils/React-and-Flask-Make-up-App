@@ -6,9 +6,10 @@ import Footer from "./Footer";
 import CarouselComponent from './Carousel'
 
 
+
 function Home(){
 
-    return (
+return (
     <div className="glassy-bg">
         <div className="container mx-auto max-w-screen pt-16">
             <CarouselComponent/>
