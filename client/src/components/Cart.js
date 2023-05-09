@@ -266,8 +266,6 @@ return (
   < Footer />
 </div>
 );
-
-
 }
 
 export default Cart;

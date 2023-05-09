@@ -16,6 +16,10 @@ const Navbar = () => {
 
   const { user, setUser } = useContext(UserContext);
 
+  const [dropdown, setDropdown] = useState(null);
+
+  
+
 
   function handleLogoutClick() {
       fetch("/logout", { method: "DELETE" }).then(() => {
@@ -24,10 +28,18 @@ const Navbar = () => {
       });
   }
 
+  function toggleDropdown(dropdownName){
+    if (dropdown === dropdownName){
+      setDropdown(null)
+    } else {
+      setDropdown(dropdownName)
+    }
+  }
+
 
   
 
-  // w-full h-30 bg-white border-b-[1px] border-b-gray-800"
+  
   return (
     <div className='bg-stone-800 relative'>
       <nav className="w-full h-28 border-b-2 border-gray-700">
@@ -46,13 +58,18 @@ const Navbar = () => {
                 Home
               </Link>
             </li>
-            <li className="relative group">
+            <li className="relative" 
+                 onMouseEnter={() => setDropdown('products')}
+                 onMouseLeave={() => setDropdown(null)}
+            >
               <Link
-                to="/products"
-                className="text-xl text-white font-bold hover:text-red-900 cursor-pointer duration-300"
+                 onClick={() => toggleDropdown('products')}
+                 className="text-xl text-white font-bold hover:text-red-900 cursor-pointer duration-300"
+                 to="/products"
               >
                 Products
               </Link>
+              {dropdown === 'products' && (
               <div className="absolute left-0 mt-2 space-y-2 text-black text-xl my-auto rounded-md p-3 hidden bg-white shadow-md z-10">
                 {categories.map((category) => (
                   <div className="hover:text-red-900" key={category.name}>
@@ -62,6 +79,7 @@ const Navbar = () => {
                   </div>
                 ))}
               </div>
+              )}
             </li>
             {user ? (
               <>
@@ -74,24 +92,33 @@ const Navbar = () => {
               </>
             ) : (
               <>
-                <li className="relative group">
+                <li className="relative"
+                     onMouseEnter={() => setDropdown('login')}
+                     onMouseLeave={() => setDropdown(null)} 
+                >
                   <Link
-                    to="/login"
+                    onClick={() => toggleDropdown('login')}
                     className="text-xl text-white font-bold hover:text-red-900 cursor-pointer duration-300"
+                    to="/login"
                   >
                     Login
                   </Link>
+                  {dropdown === 'login' && (
                   <div className="absolute left-0 mt-2 space-y-2 text-black text-xl my-auto rounded-md p-3 hidden  bg-white hover:text-red-900">
                     <Link to="/signup">Signup</Link>
                   </div>
+                  )}
                 </li>
               </>
             )}
-            <li className="relative group">
-              <Link to="/cart" className="mx-4">
-                <AiOutlineShoppingCart className='text-3xl text-white'/>
+            <li className="relative"
+                onMouseEnter={() => setDropdown('cart')}
+                onMouseLeave={() => setDropdown(null)}
+            >
+              <Link onClick={() => toggleDropdown('cart')} className="mx-4" to="/cart">
+                <AiOutlineShoppingCart className="text-3xl text-white" />
               </Link>
-              {user && (
+              {user && dropdown === 'cart' && (
                 <div className="absolute left-0 mt-2 space-y-2 text-black text-xl my-auto rounded-md p-3 hidden bg-white hover:text-red-900">
                   <Link to="/past-orders">Order History</Link>
                 </div>
