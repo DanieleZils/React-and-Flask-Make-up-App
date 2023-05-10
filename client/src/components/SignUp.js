@@ -103,7 +103,6 @@ const Signup = () => {
             onChange={(e) => setEmail(e.target.value)}
             className="w-full p-2 border border-gray-300 rounded-md"
           />
-          <p className="text-xs text-gray-500">*Field required</p>
           </div>
           <div className="space-y-2">
           <label htmlFor="username" className="block text-l font-medium">Username * </label>

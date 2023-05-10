@@ -6,7 +6,7 @@ import Gold from '../assets/gold.png';
 const Footer = () => {
     return (
       <footer className="bg-stone-800 py-4">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-14">
           <div className="flex flex-wrap justify-between items-start">
             <div className="w-full md:w-1/2 mb-4 md:mb-0">
               <img src={Gold} alt="logo" className="w-36 mb-5" />

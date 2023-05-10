@@ -74,9 +74,9 @@ class Signup(Resource):
             new_user.password_hash = data['password']
             db.session.add(new_user)
             db.session.commit()
-        except IntegrityError:
+        except IntegrityError as e:
             db.session.rollback()
-            return make_response({"error": "Username already exists"}, 422)
+            return make_response({"error": f"Email already exists: {str(e)}"}, 422)
         except ValueError as ve:
             return make_response({"error": ve.__str__()}, 422)
         except Exception as e:
@@ -86,6 +86,7 @@ class Signup(Resource):
         return make_response(new_user.to_dict(), 201)
 
 api.add_resource(Signup, '/signup')
+
 
 class CheckSession(Resource):
 
