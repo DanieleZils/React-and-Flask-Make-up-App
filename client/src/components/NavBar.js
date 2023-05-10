@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from './UserContext';
 import gold from '../assets/gold.png';
 import {AiOutlineShoppingCart} from 'react-icons/ai';
@@ -17,11 +17,14 @@ const Navbar = () => {
 
   const [dropdown, setDropdown] = useState(null);
 
+  const navigate = useNavigate();
+
 
   function handleLogoutClick() {
       fetch("/logout", { method: "DELETE" }).then(() => {
         setUser(null);
         localStorage.removeItem("user"); // Remove user from localStorage
+        navigate("/");
       });
   }
 
