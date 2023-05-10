@@ -53,38 +53,39 @@ function ProductDetail(){
 
     
 return (
-   <div>
-    <div className="glassy-bg min-h-screen flex justify-center items-start py-28">
-        <div className="max-w-screen-xl flex flex-col bg-white p-6 rounded-3xl shadow-lg">
-        <div className="flex justify-around items-center w-full ">
-            <div className="w-1/3 rounded-2xl ">
-            <Link to="/products">
-                <img className="w-2/3 mx-auto rounded-2xl object-cover" src={product.image_url} alt={product.name} />
-            </Link>
-            </div>
-            <div className="w-1/3">
-            <h2 className="text-2xl font-bold mb-2">{product.name}</h2>
-            <h3 className="text-xl font-semibold mb-4"> ${product.price} </h3>
-            <button
-                className="addToCart px-4 py-2 bg-stone-800 text-white font-bold rounded-md shadow-lg hover:text-red-900 cursor-pointer duration-300"
-                onClick={addToCart}
-            >
-                Add to Cart
-            </button>
-            </div>
-            </div>
-            <div className="w-full mt-16">
-            <div className="description w-1/2 mx-auto">
-            <h2 className="h2 text-2xl font-bold mb-4">About the Product:</h2>
-            <p className="text-lg ">{product.description}</p>
-            </div>
-        </div>
-        </div>
-    </div>
-    <Footer />
-</div>
- );
+   <div className="">
+         <div className="glassy-bg py-20 h-screen">
+             <div className="max-w-screen-xl container mx-auto py-32 backdrop-blur-md bg-white/40 p-6 rounded-3xl shadow-lg">
+             <h1 className="text-3xl font-bold mb-4 text-center">{product.name}</h1>
+             <div className="flex justify-around items-center w-full ">
+                 <div className="w-1/2 rounded-2xl overflow-hidden py-6">
+                 <Link to="/products">
+                     <img className="w-2/3 mx-auto rounded-2xl object-cover shadow-lg transition duration-300 hover:scale-110" src={product.image_url} alt={product.name} />
+                 </Link>
+                 <div className="mt-8 text-center">
+                     <h3 className="text-xl font-semibold mb-4"> ${product.price} </h3>
+                     <button
+                         className="px-5 py-2 bg-stone-800 text-white font-bold rounded-md shadow-lg transition duration-300 hover:scale-110"
+                         onClick={addToCart}
+                     >
+                         Add to Cart
+                     </button>
+                 </div>
+                 </div>
+                 <div className="w-1/2">
+                 <div className="description w-full mx-auto">
+                 <h2 className="h2  font-bold mb-4">About the Product:</h2>
+                 <p className="text-lg text-justify ">{product.description}</p>
+                 </div>
+                 </div>
+                 </div>
+             </div>
+         </div>
+         <Footer />
+     </div>
+    );
 }
+     
     
       
 export default ProductDetail;

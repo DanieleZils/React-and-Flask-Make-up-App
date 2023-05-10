@@ -204,43 +204,48 @@ return (
 <div>
   <div className="glassy-bg min-h-screen pt-32">
     <div className="w-2/3 mx-auto flex flex-col justify-center items-center">
-      <h1 className="text-2xl font-bold mb-8 justify-center">Your Cart</h1>
-      {cart?.cart_products?.map((cartProduct) => (
-        <div key={cartProduct.id} className="w-2/3  p-8 mb-8 rounded-3xl shadow-lg flex justify-between items-center">
+        <div className='w-full bg-white bg-opacity-60 backdrop-blur-md p-8 mb-auto rounded-lg shadow-lg'>
+        <h1 className="text-2xl font-bold mb-8 text-center">Your Cart</h1>
+        {cart?.cart_products?.map((cartProduct) => (
+         <div key={cartProduct.id} className="w-2/3  p-8 mb-8 overflow-hidden flex justify-between items-center">
           <Link to={`/products/${cartProduct.product.id}`}>
-            <img className="w-1/2 h-auto object-cover rounded-md shadow-lg p-2" src={cartProduct.product.image_url} alt={cartProduct.product.name} />
+            <img className="w-1/2 h-auto object-cover rounded-md shadow-lg p-2 transition duration-300 hover:scale-110" src={cartProduct.product.image_url} alt={cartProduct.product.name} />
           </Link>
           <div className="w-1/2">
             <h2 className="text-xl font-bold mb-2">{cartProduct.product.name}</h2>
             <p>Quantity: {cartProduct.quantity}</p>
             <p>Price: ${cartProduct.product.price}</p>
             <p>Subtotal: ${calculateSubtotal(cartProduct).toFixed(2)}</p>
-            <input
-              className="px-2 py-1 border-2 border-gray-300 rounded-md"
-              type="number"
-              min="1"
-              defaultValue={cartProduct.quantity}
-              onChange={(e) => updateQuantity(cartProduct.id, parseInt(e.target.value))}
-            />
+            <div className="flex gap-2">
+              <input
+                className="px-2 py-1 border-2 w-12 border-gray-300 rounded-md shadow-lg hover:border-red-900 cursor-pointer duration-300"
+                type="number"
+                min="1"
+                defaultValue={cartProduct.quantity}
+                onChange={(e) => updateQuantity(cartProduct.id, parseInt(e.target.value))}
+              />
             <button
-              className="px-4 py-2  text-black font-bold rounded-md shadow-lg hover:text-red-900 cursor-pointer duration-300 ml-4"
+              className="px-5 py-2 bg-stone-800 text-white rounded-md shadow-lg transition duration-300 hover:scale-110 "
               onClick={() => deleteFromCart(cartProduct.id)}
             >
               Delete
             </button>
-            <p className="text-xl font-semibold mb-4">Total: ${calculateTotal(cart.cart_products).toFixed(2)}</p>
+          </div>
           </div>
         </div>
       ))}
+      <p className="text-xl font-semibold mb-4 text-center">Total: ${calculateTotal(cart.cart_products).toFixed(2)}</p>
       {cart?.cart_products?.length > 0 && stripePromise && (
         <>
           {!showReceipt ? (
+           
             <button
-              className="px-4 py-2 bg-white text-black font-bold rounded-md shadow-lg hover:text-red-900 cursor-pointer duration-300"
+              className="px-5 py-2 bg-stone-800 text-white font-bold rounded-md shadow-lg transition duration-300 hover:scale-110"
               onClick={reviewOrder}
             >
               Review Order
             </button>
+         
           ) : (
             <>
               <div className="mt-20 w-2/3 mx-auto flex flex-col justify-center items-center rounded-3xl p-8">
@@ -261,6 +266,7 @@ return (
           )}
         </>
       )}
+      </div>
     </div>
   </div>
   < Footer />

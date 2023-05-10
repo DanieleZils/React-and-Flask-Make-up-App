@@ -9,7 +9,6 @@ const categories = [
   { name: "Face", path: "/face" },
   { name: "Lip", path: "/lip" },
   { name: "Eye", path: "/eye" },
-  { name: "Products", path: "/products" },
 ];
 
 const Navbar = () => {
@@ -52,7 +51,7 @@ const Navbar = () => {
             <li>
               <Link
                 to="/"
-                className="text-xl text-white font-bold hover:text-red-900 cursor-pointer duration-300 py-7 px-3 inline-block"
+                className="text-xl text-white font-bold hover:opacity-50 cursor-pointer duration-300 py-7 px-3 inline-block"
               >
                 Home
               </Link>
@@ -63,15 +62,15 @@ const Navbar = () => {
             >
               <Link
                  onClick={() => toggleDropdown('products')}
-                 className="text-xl text-white font-bold hover:text-red-900 cursor-pointer duration-300"
+                 className="text-xl text-white font-bold hover:opacity-50 cursor-pointer duration-300"
                  to="/products"
               >
                 Products
               </Link>
               {dropdown === 'products' && (
-              <div className="absolute left-0 mt-2 space-y-2 text-black text-xl my-auto rounded-md p-3 hidden backdrop-blur-xl bg-white shadow-md z-10">
+              <div className="absolute py-4 space-y-2 text-black text-lg font-bold my-auto rounded-md p-8 hidden shadow-md z-10 backdrop-blur-lg bg-white/50">
                 {categories.map((category) => (
-                  <div className="hover:text-red-900" key={category.name}>
+                  <div className="transition duration-300 hover:scale-125" key={category.name}>
                     <Link to={category.path}>
                       {category.name}
                     </Link>
@@ -86,7 +85,9 @@ const Navbar = () => {
                   <span className='text-xl text-white'>Welcome, {user.username}!</span>
                 </li>
                 <li>
-                  <button onClick={handleLogoutClick}>Logout</button>
+                  <div className='overflow-hidden p-4'>
+                  <button onClick={handleLogoutClick} className='transition duration-300 hover:scale-110 text-lg'>Logout</button>
+                  </div>
                 </li>
               </>
             ) : (
@@ -97,14 +98,16 @@ const Navbar = () => {
                 >
                   <Link
                     onClick={() => toggleDropdown('login')}
-                    className="text-xl text-white font-bold hover:text-red-900 cursor-pointer duration-300"
+                    className="text-xl text-white font-bold hover:opacity-50 cursor-pointer duration-300"
                     to="/login"
                   >
                     Login
                   </Link>
                   {dropdown === 'login' && (
-                  <div className="absolute left-0 mt-2 space-y-2 text-black text-xl my-auto rounded-md p-3 hidden  bg-white hover:text-red-900">
+                  <div className="absolute py-4 space-y-2 text-black text-lg font-bold my-auto rounded-md p-8 overflow-hidden hidden shadow-md z-10 backdrop-blur-lg bg-white/50">
+                    <div className='transition duration-300 hover:scale-110'>
                     <Link to="/signup">Signup</Link>
+                    </div>
                   </div>
                   )}
                 </li>
@@ -119,8 +122,10 @@ const Navbar = () => {
                 <AiOutlineShoppingCart className="text-3xl text-white" />
               </Link>
               {user && dropdown === 'cart' && (
-                <div className="absolute left-0 mt-2 space-y-2 text-black text-xl my-auto rounded-md p-3 hidden bg-white hover:text-red-900">
+                <div className="absolute py-4 space-y-2 text-black text-lg font-bold my-auto rounded-md p-8 overflow-hidden hidden shadow-md z-10 backdrop-blur-lg bg-white/50">
+                  <div className='transition duration-300 hover:scale-110'>
                   <Link to="/past-orders">Order History</Link>
+                  </div>
                 </div>
               )}
             </li>

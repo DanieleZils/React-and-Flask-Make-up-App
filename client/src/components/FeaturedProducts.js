@@ -45,12 +45,12 @@ function FeaturedProducts() {
     
       return (
         // map the random featured products to the page
-        <div className="flex gap-2 py-20">
+        <div className="flex gap-4 py-20">
           {randomFeaturedProducts.map((product) => (
-            <div key={product.id} className="w-64 h-64 relative border border-gray-300 rounded-3xl transition duration-200 transform group-hover:scale-110">
+            <div key={product.id} className="w-64 h-64 relative border border-gray-300 rounded-3xl overflow-hidden transition duration-300 hover:scale-110">
               <Link to={`/products/${product.id}`}>
-                <img className="w-full h-auto object-cover absolute rounded-3xl" src={product.image_url} alt={product.name} />
-                <div className="absolute bottom-0 w-full h-1/4 bg-white rounded-b-3xl border-t-2 border-gray-300">
+                <img className="w-full  absolute rounded-3xl" src={product.image_url} alt={product.name} />
+                <div className="absolute bottom-0 py-4 w-full h-1/5 bg-white rounded-b-3xl">
                   <div className="flex flex-col justify-center items-center gap-2 h-full">
                     <h1 className="text-l font-bold">{product.name}</h1>
                     <h2 className="text-l font-bold">${product.price}</h2>

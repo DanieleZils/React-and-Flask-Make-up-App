@@ -63,8 +63,8 @@ function Login() {
  
  return (
 <div className="min-h-screen flex flex-col glassy-bg">
- <div className="flex-grow flex items-start pt-20 justify-center">
-    <div className="w-full max-w-md p-8 bg-white bg-opacity-60 backdrop-blur-md rounded-lg shadow-lg">
+ <div className="flex-grow flex items-start pt-40 justify-center">
+    <div className="w-full max-w-md p-16 bg-white bg-opacity-60 backdrop-blur-md rounded-lg shadow-lg">
       <form onSubmit={handleSubmit} className="space-y-6">
            {fromProductDetail && (
               <p className="mt-4 text-red-600 font-bold">
@@ -88,6 +88,7 @@ function Login() {
             onChange={(e) => setUsername(e.target.value)}
             className="w-full p-2 border border-gray-300 rounded-md"
           />
+          <p className="text-xs text-gray-500">Username must be at least 4 characters long</p>
         </div>
         <div className="space-y-2">
           <label htmlFor="password" className="block text-l font-medium">
@@ -100,6 +101,7 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
             className="w-full p-2 border border-gray-300 rounded-md"
           />
+          <p className="text-xs text-gray-500">Password must be at least 8 characters long</p>
         </div>
         <button
           type="submit"
