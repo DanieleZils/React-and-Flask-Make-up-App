@@ -8,8 +8,8 @@ import bannerthree from '../assets/bannerthree.png';
 const CarouselComponent = () => {
   const images = [
     { src: Banner, link: '/products' },
-    { src: bannertwo, link: '/products' },
-    { src: bannerthree, link: '/products' },
+    { src: bannertwo, link: '/products/9' },
+    { src: bannerthree, link: '/products/13' },
   ];
 
   return (

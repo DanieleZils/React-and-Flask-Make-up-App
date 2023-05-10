@@ -42,7 +42,7 @@ const Navbar = () => {
     <div className='bg-stone-800 relative'>
       <nav className="w-full h-28 border-b-2 border-gray-700">
         <div className="h-full flex items-center justify-around px-32">
-          <div className="mx-4 w-40">
+          <div className="mx-1 w-40">
             <Link to="/">
               <img src={gold} alt="logo" />
             </Link>
