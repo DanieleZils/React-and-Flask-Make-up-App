@@ -8,7 +8,7 @@ function Products({productCards}){
 
     return (
         <div className="glassy-bg ">
-            <div className="max-w-screen-2xl mx-auto py-10 grid grid-cols-4 gap-12">
+            <div className="max-w-screen-xl mx-auto py-14 grid grid-cols-4 gap-8">
                 {productCards}
             </div>
             < Footer />

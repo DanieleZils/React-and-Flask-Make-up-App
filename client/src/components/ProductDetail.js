@@ -54,8 +54,8 @@ function ProductDetail(){
     
 return (
    <div>
-    <div className="glassy-bg min-h-screen flex justify-center items-start py-20">
-        <div className="w-2/3 flex flex-col bg-white p-6 mb-8 rounded-3xl shadow-lg">
+    <div className="glassy-bg min-h-screen flex justify-center items-start py-28">
+        <div className="max-w-screen-xl flex flex-col bg-white p-6 rounded-3xl shadow-lg">
         <div className="flex justify-around items-center w-full ">
             <div className="w-1/3 rounded-2xl ">
             <Link to="/products">
@@ -66,7 +66,7 @@ return (
             <h2 className="text-2xl font-bold mb-2">{product.name}</h2>
             <h3 className="text-xl font-semibold mb-4"> ${product.price} </h3>
             <button
-                className="addToCart px-4 py-2 bg-white text-black font-bold rounded-md shadow-lg hover:text-red-900 cursor-pointer duration-300"
+                className="addToCart px-4 py-2 bg-stone-800 text-white font-bold rounded-md shadow-lg hover:text-red-900 cursor-pointer duration-300"
                 onClick={addToCart}
             >
                 Add to Cart

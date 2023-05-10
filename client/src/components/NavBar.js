@@ -39,14 +39,15 @@ const Navbar = () => {
 
   
   return (
-    <div className='bg-stone-800 relative'>
-      <nav className="w-full h-28 border-b-2 border-gray-700">
-        <div className="h-full flex items-center justify-around px-32">
-          <div className="mx-1 w-40">
+   
+      <div className="w-full h-28 border-b-2 border-gray-700 bg-stone-800">
+        <div className="max-w-screen-xl h-full mx-auto flex items-center justify-between">
+          <div className=''>
             <Link to="/">
-              <img src={gold} alt="logo" />
+              <img src={gold} alt="logo" className='w-40'/>
             </Link>
           </div>
+          <div className='flex items-center'>
           <ul className="flex items-center gap-8">
             <li>
               <Link
@@ -127,8 +128,9 @@ const Navbar = () => {
               null
             )}
           </ul>
+
         </div>
-      </nav>
+      </div>
     </div>
   );
   

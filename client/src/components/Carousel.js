@@ -13,7 +13,7 @@ const CarouselComponent = () => {
   ];
 
   return (
-    <div className="container mx-auto max-w-screen">
+    <div className="container mx-auto max-w-screen-xl">
       <Carousel
         showStatus={false}
         showThumbs={false}
