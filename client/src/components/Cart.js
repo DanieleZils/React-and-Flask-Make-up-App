@@ -203,8 +203,8 @@ if (!user) {
 return (
 <div>
   <div className="glassy-bg min-h-screen pt-32">
-    <div className="w-2/3 mx-auto flex flex-col justify-center items-center">
-        <div className='w-full bg-white bg-opacity-60 backdrop-blur-md p-8 mb-auto rounded-lg shadow-lg'>
+    <div className="w-2/3 mx-auto flex flex-col justify-center items-start">
+        <div className='w-full bg-white bg-opacity-60 backdrop-blur-md p-8 mb-auto rounded-xl shadow-lg'>
         <h1 className="text-2xl font-bold mb-8 text-center">Your Cart</h1>
         {cart?.cart_products?.map((cartProduct) => (
          <div key={cartProduct.id} className="w-2/3  p-8 mb-8 overflow-hidden flex justify-between items-center">
@@ -237,23 +237,23 @@ return (
       <p className="text-xl font-semibold mb-4 text-center">Total: ${calculateTotal(cart.cart_products).toFixed(2)}</p>
       {cart?.cart_products?.length > 0 && stripePromise && (
         <>
-          {!showReceipt ? (
-           
-            <button
-              className="px-5 py-2 bg-stone-800 text-white font-bold rounded-md shadow-lg transition duration-300 hover:scale-110"
-              onClick={reviewOrder}
-            >
-              Review Order
-            </button>
-         
-          ) : (
+         {!showReceipt ? (
+            <div className="w-full text-center">
+              <button
+                className="px-5 py-2 bg-stone-800 text-white font-bold rounded-md shadow-lg transition duration-300 hover:scale-110"
+                onClick={reviewOrder}
+              >
+                Review Order
+              </button>
+            </div>
+              ) : (
             <>
               <div className="mt-20 w-2/3 mx-auto flex flex-col justify-center items-center rounded-3xl p-8">
                 <Receipt cartProducts={cart.cart_products} total={calculateTotal(cart.cart_products)} user={user} />
 
                 {showCheckoutButton && (
                   <button
-                    className="px-4 py-2 bg-white text-black font-bold rounded-md shadow-lg hover:text-red-900 cursor-pointer duration-300 mt-4"
+                    className="px-5 py-2 my-4 bg-stone-800 text-white font-bold rounded-md shadow-lg transition duration-300 hover:scale-110"
                     onClick={() => {
                       checkout(handleStripeCheckout);
                     }}
