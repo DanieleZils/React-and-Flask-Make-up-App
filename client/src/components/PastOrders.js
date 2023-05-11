@@ -48,7 +48,6 @@ return (
       pastOrders.map((order, index) => (
         <div key={index} className="w-2/3 bg-white p-8 mb-8 rounded-3xl shadow-lg">
            <h1 className="text-3xl font-bold mb-8 text-center">Past Orders</h1>
-          <h2 className="text-2xl font-bold mb-4">Order #{order.id}</h2>
           <ul>
             {order.cart_products.map((cartProduct) => (
               <div key={cartProduct.id} className="flex items-center mb-4">

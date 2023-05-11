@@ -202,23 +202,23 @@ if (!user) {
 
 return (
 <div>
-  <div className="glassy-bg min-h-screen pt-32">
+  <div className="glassy-bg min-h-screen py-24">
     <div className="w-2/3 mx-auto flex flex-col justify-center items-start">
-        <div className='w-full bg-white bg-opacity-60 backdrop-blur-md p-8 mb-auto rounded-xl shadow-lg'>
+        <div className='w-full bg-white bg-opacity-60 backdrop-blur-md p-8 mb-auto rounded-xl shadow-lg justify-center'>
         <h1 className="text-2xl font-bold mb-8 text-center">Your Cart</h1>
         {cart?.cart_products?.map((cartProduct) => (
-         <div key={cartProduct.id} className="w-2/3  p-8 mb-8 overflow-hidden flex justify-between items-center">
+         <div key={cartProduct.id} className="p-8 mb-8 overflow-hidden flex justify-between items-center">
           <Link to={`/products/${cartProduct.product.id}`}>
-            <img className="w-1/2 h-auto object-cover rounded-md shadow-lg p-2 transition duration-300 hover:scale-110" src={cartProduct.product.image_url} alt={cartProduct.product.name} />
+            <img className=" h-80 object-cover rounded-md shadow-lg p-2 transition duration-300 hover:scale-110" src={cartProduct.product.image_url} alt={cartProduct.product.name} />
           </Link>
           <div className="w-1/2">
-            <h2 className="text-xl font-bold mb-2">{cartProduct.product.name}</h2>
-            <p>Quantity: {cartProduct.quantity}</p>
-            <p>Price: ${cartProduct.product.price}</p>
-            <p>Subtotal: ${calculateSubtotal(cartProduct).toFixed(2)}</p>
-            <div className="flex gap-2">
+            <h2 className="text-xl font-bold text-center">{cartProduct.product.name}</h2>
+            <p className='text-center pt-12'>Quantity: {cartProduct.quantity}</p>
+            <p className='text-center'>Price: ${cartProduct.product.price}</p>
+            <p className='text-center'>Subtotal: ${calculateSubtotal(cartProduct).toFixed(2)}</p>
+            <div className="flex gap-2 justify-center py-12">
               <input
-                className="px-2 py-1 border-2 w-12 border-gray-300 rounded-md shadow-lg hover:border-red-900 cursor-pointer duration-300"
+                className="px-2 py-2 border-2 w-12 border-gray-300 rounded-md shadow-lg hover:border-red-900 cursor-pointer duration-300"
                 type="number"
                 min="1"
                 defaultValue={cartProduct.quantity}
@@ -234,7 +234,7 @@ return (
           </div>
         </div>
       ))}
-      <p className="text-xl font-semibold mb-4 text-center">Total: ${calculateTotal(cart.cart_products).toFixed(2)}</p>
+      <p className="text-xl font-semibold mb-4 text-center pb-8">Total: ${calculateTotal(cart.cart_products).toFixed(2)}</p>
       {cart?.cart_products?.length > 0 && stripePromise && (
         <>
          {!showReceipt ? (
