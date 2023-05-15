@@ -1,131 +1,40 @@
-body {
-  margin: 50px;;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import 'react-responsive-carousel/lib/styles/carousel.min.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+
+  --primary-dark: #6d2b3d;
+  --primary-light: white;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@layer base {
+  html {
+    @apply scroll-smooth
+  }
+  body{
+    @apply font-[Sans-serif];
+  }
+  .glassy-bg {
+    background-image: linear-gradient(to right, rgba(109, 43, 61, 0.7), rgba(250, 250, 250, 0.96));
+  }
+
+  li {
+    @apply p-4 text-sm
+  }
+  button {
+    @apply px-4 py-2 border bg-white text-black font-bold rounded-md shadow-lg
+  }
+  h2 {
+    @apply text-xl font-bold
+  }
 }
 
-
-.navBar {
-
-  display: flex;
-  justify-content: right;
-  margin-bottom: 50px;
-  background: bisque;
-  height: 100px;
- 
-  
-
-}
-
-.productCard img {
-
-  width: 285px;
-  height:300px;
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 15px;
-  padding: 15px;
-  margin: 20px;
-  object-fit: cover;
-
-}
-
-.productCard h3, h4 {
-
-  justify-self: center;
-  color: black;
-  text-align: center;
-}
-
-.productList{
-
-  background-color: bisque;
-  display: flex;
-  flex-wrap: wrap;
-  padding-bottom: 10px;
-  justify-content: center;
-
-
-}
-
-.featProduct{
-
-  display: flex;
-  overflow-x: auto;
-  white-space: nowrap; 
-
-
-
-}
-
-
-.featProductImg {
-  margin-right: 10px;
-}
-
-.featProductImg img {
-  max-width: 100%;
-  height: auto;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
+.relative:hover .hidden {
   display: block;
 }
 
-.dropdown-content a:hover {
-  background-color: lightcoral;
-}
 
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-.navLink {
-  color: #333;
-  text-decoration: none;
-  margin-right: 1rem;
-  font-size: 16px;
-  font-weight: 500;
-}
-
-.navLink:hover {
-  color: lightcoral;
-  text-decoration: underline;
-}
-
-/* Style the dropdown links */
-.dropdown-content .navLink {
-  text-decoration: none;
-  font-weight: normal;
-  margin-right: 0;
-}
-
-.dropdown-content .navLink:hover {
-  background-color: #ddd;
-  text-decoration: none;
-}

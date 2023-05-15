@@ -65,13 +65,18 @@ class Signup(Resource):
         data = request.get_json()
 
         try:
-            new_user = User(username=data['username'])
+            new_user = User(
+                username=data['username'],
+                email=data['email'],
+                first_name=data['firstName'],
+                last_name=data['lastName']
+                )
             new_user.password_hash = data['password']
             db.session.add(new_user)
             db.session.commit()
-        except IntegrityError:
+        except IntegrityError as e:
             db.session.rollback()
-            return make_response({"error": "Username already exists"}, 422)
+            return make_response({"error": f"Email already exists: {str(e)}"}, 422)
         except ValueError as ve:
             return make_response({"error": ve.__str__()}, 422)
         except Exception as e:
@@ -81,6 +86,7 @@ class Signup(Resource):
         return make_response(new_user.to_dict(), 201)
 
 api.add_resource(Signup, '/signup')
+
 
 class CheckSession(Resource):
 
@@ -285,6 +291,7 @@ class CartResource(Resource):
         cart_product = CartProduct.query.filter_by(id=cart_product_id).first()
         if cart_product:
             try:
+               
                 db.session.delete(cart_product)
                 db.session.commit()
                 return make_response({}, 204)
@@ -304,9 +311,6 @@ class OrderResource(Resource):
             if cart:
                 try:
                     cart.is_ordered = True
-                     # Delete cart_products associated with the cart
-                    CartProduct.query.filter_by(cart_id=cart.id).delete()
-
                     db.session.commit()
 
                     #create new empty cart to the user
@@ -322,6 +326,33 @@ class OrderResource(Resource):
 
 api.add_resource(OrderResource, '/order')
 
+
+class PastOrdersResource(Resource):
+
+    def get(self):
+
+        user_id = session.get('user_id')
+        user = db.session.get(User, user_id)
+
+        if user:
+            if user:
+                query = Cart.query.filter_by(user_id=user_id, is_ordered=True)
+                last_order_only = request.args.get('last_order_only', default=False, type=bool)
+
+                if last_order_only:
+                    query = query.order_by(Cart.id.desc()).limit(1)
+
+                past_orders = query.all()
+
+            for order in past_orders:
+                cart_products = CartProduct.query.filter_by(cart_id=order.id).all()
+                order.cart_products = cart_products
+
+            return make_response([order.to_dict() for order in past_orders], 200)
+        return make_response({"error": "User not found"}, 404)
+    
+api.add_resource(PastOrdersResource, '/past-orders')
+                
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

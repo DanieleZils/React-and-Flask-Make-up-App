@@ -6,8 +6,17 @@ import { Link } from "react-router-dom";
 function FeaturedProducts() {
 
     const [ featuredProducts, setFeaturedProducts ] = useState([]);
+    const [ randomFeaturedProducts, setRandomFeaturedProducts ] = useState([]);
 
 
+    function getRandomElements(arr, count) {
+        const shuffled = [...arr];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled.slice(0, count);
+      }
 
     useEffect(() => {
         fetch('/featured-products')
@@ -29,19 +38,29 @@ function FeaturedProducts() {
 
 
 
-    return (
-       
-            <div className="featProduct">
-                {featuredProducts.map((product) => (
-                    <div key={product.id} className="featProductImg">
-                        <Link to={`/products/${product.id}`}>
-                        <img src={product.image_url} alt={product.name} />
-                        </Link>
-                    </div>
-                ))}
-            </div>
-    
-    )
-}
 
-export default FeaturedProducts;
+    useEffect(() => {
+        setRandomFeaturedProducts(getRandomElements(featuredProducts, 5));
+      }, [featuredProducts]);
+    
+      return (
+        // map the random featured products to the page
+        <div className="flex gap-4 py-20">
+          {randomFeaturedProducts.map((product) => (
+            <div key={product.id} className="w-64 h-64 relative border border-gray-300 rounded-3xl overflow-hidden transition duration-300 hover:scale-110">
+              <Link to={`/products/${product.id}`}>
+                <img className="w-full  absolute rounded-3xl" src={product.image_url} alt={product.name} />
+                <div className="absolute bottom-0 py-4 w-full h-1/5 bg-white rounded-b-3xl">
+                  <div className="flex flex-col justify-center items-center gap-2 h-full">
+                    <h1 className="text-l font-bold">{product.name}</h1>
+                    <h2 className="text-l font-bold">${product.price}</h2>
+                    </div>
+                </div>
+              </Link>
+            </div>
+          ))}
+        </div>
+      );
+    }
+    
+    export default FeaturedProducts;
