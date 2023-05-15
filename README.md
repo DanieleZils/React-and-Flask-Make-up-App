@@ -50,6 +50,25 @@ The application should now be running on ```localhost:3000.```
 
 ## Website Screenshots
 
+### Homepage
+
 ![Homepage](https://user-images.githubusercontent.com/119082829/238405081-97274b3b-a642-4178-9262-c5ddbfbee5e5.png)
+
+### Products Page
+
+![Products Page](https://user-images.githubusercontent.com/119082829/238405982-dbfe9018-416e-4e21-8d51-70e24209fc28.png)
+
+### Signup Page
+
+![Signup](https://user-images.githubusercontent.com/119082829/238406423-a543cc6c-32f5-45b6-98c3-a0c38e291c6d.png)
+
+### Cart Page
+
+![Cart Page](https://user-images.githubusercontent.com/119082829/238406665-b449388e-d91c-4aa6-ae06-2388d412d80d.png)
+
+### Past Orders
+
+![Past Orders](https://user-images.githubusercontent.com/119082829/238406937-aeba39c5-1b30-432f-96e6-22d19bb2dbea.png)
+
 
 
