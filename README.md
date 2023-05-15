@@ -22,7 +22,7 @@ Prerequisites:
 
 You can install the required libraries by running the following command in your terminal:
 
-```$ pipenv install``
+```$ pipenv install```
 
 run the application:
 python app.py
@@ -49,5 +49,7 @@ The application should now be running on ```localhost:3000.```
 3.Responsive and intuitive user interface.
 
 ## Website Screenshots
+
+![Homepage](https://user-images.githubusercontent.com/119082829/238405081-97274b3b-a642-4178-9262-c5ddbfbee5e5.png)
 
 
