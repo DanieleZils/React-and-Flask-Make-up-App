@@ -39,7 +39,7 @@ function OrderComplete() {
 
   return (
    
-    <div className='glassy-bg h-screen'>
+    <div className='glassy-bg h-screen py-24'>
      <div className='container max-w-screen-xl mx-auto py-32 backdrop-blur-md bg-white/40 p-6 rounded-3xl shadow-lg '>
       <Receipt cartProducts={order.cart_products} total={calculateTotal()} user={user} />
       </div>

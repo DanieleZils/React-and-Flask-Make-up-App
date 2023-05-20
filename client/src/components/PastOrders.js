@@ -46,7 +46,7 @@ return (
       <p>No past orders found.</p>
     ) : (
       pastOrders.map((order, index) => (
-        <div key={index} className="w-2/3 bg-white p-8 mb-8 rounded-3xl shadow-lg">
+        <div key={index} className="w-2/3 backdrop-blur-md bg-white/40 p-8 mb-8 rounded-3xl shadow-lg">
            <h1 className="text-3xl font-bold mb-8 text-center">Past Orders</h1>
           <ul>
             {order.cart_products.map((cartProduct) => (
@@ -63,7 +63,7 @@ return (
               </div>
             ))}
           </ul>
-          <h3 className="text-xl font-semibold">Total: ${calculateTotal(order.cart_products).toFixed(2)}</h3>
+          <h3 className="text-xl font-semibold text-center">Total: ${calculateTotal(order.cart_products).toFixed(2)}</h3>
         </div>
       ))
     )}
