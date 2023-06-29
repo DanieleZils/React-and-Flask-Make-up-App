@@ -30,8 +30,8 @@ const CarouselComponent = () => {
       >
         {images.map((image, index) => (
         <Link key={index} to={image.link}>
-          <div className="relative w-full h-[45vh]">
-             <img className="w-full h-full object-cover" src={image.src} alt={`Carousel ${index}`} />
+          <div className="relative w-full h-[20vh] md:h-[45vh]">
+             <img className="w-full h-full object-contain md:object-cover" src={image.src} alt={`Carousel ${index}`} />
           </div>
         </Link>
         ))}

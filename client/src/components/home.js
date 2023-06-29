@@ -8,7 +8,7 @@ import CarouselComponent from './Carousel'
 function Home(){
 
 return (
-    <div className="glassy-bg">
+    <div className="glassy-bg min-h-screen overflow-scroll">
         <div className="container mx-auto max-w-screen pt-16">
             <CarouselComponent/>
         </div>

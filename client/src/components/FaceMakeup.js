@@ -15,7 +15,7 @@ function FaceMakeup() {
 
   return (
   <div>
-    <div className="glassy-bg py-10 min-h-screen">
+    <div className="glassy-bg py-10 min-h-screen overflow-auto">
       <div className="max-w-screen-xl mx-auto py-10 grid grid-cols-4 gap-10">
       {products.map((product) => (
         <ProductCard key={product.id} product={product} />
