@@ -63,7 +63,7 @@ function Login() {
  
  return (
 <div className="min-h-screen flex flex-col glassy-bg overflow-auto">
- <div className="flex-grow flex items-start pt-40 justify-center">
+ <div className="flex-grow flex items-start py-20 justify-center">
     <div className="w-full max-w-md p-16 bg-white bg-opacity-60 backdrop-blur-md rounded-lg shadow-lg">
       <form onSubmit={handleSubmit} className="space-y-6">
            {fromProductDetail && (

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { UserContext } from './UserContext';
 import Receipt from './Receipt';
+import Footer from './Footer';
 
 
 function OrderComplete() {
@@ -43,6 +44,7 @@ function OrderComplete() {
      <div className='container max-w-screen-xl mx-auto py-32 backdrop-blur-md bg-white/40 p-6 rounded-3xl shadow-lg '>
       <Receipt cartProducts={order.cart_products} total={calculateTotal()} user={user} />
       </div>
+      < Footer />
     </div>
  
   );

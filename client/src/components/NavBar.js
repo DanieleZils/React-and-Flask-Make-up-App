@@ -26,7 +26,7 @@ const Navbar = () => {
   const handleNavClick = () => setNavOpen(!navOpen);
 
   const handleNavClose = () => {
-    setNavOpen(false);
+    setTimeout(() => setNavOpen(false), 200);
   };
 
   function handleLogoutClick() {
@@ -44,9 +44,6 @@ const Navbar = () => {
       setDropdown(dropdownName)
     }
   }
-
-
-  
 
   
   return (
@@ -151,7 +148,8 @@ const Navbar = () => {
       <div onClick={handleNavClick} className='block md:hidden px-8'>
            {navOpen ? <AiOutlineClose size={30} className='text-white' /> : <AiOutlineMenu size={30} className='text-white'/>}
       </div>
-      <div className={navOpen ? 'fixed left-0 top-0 w-[60%] h-full border-r border-r-gray-300 bg-gray-100 ease-in-out duration-500 z-50': 'ease-in-out duration-500 fixed left-[-100%] z-50'}>
+      <div className={`fixed top-0 w-[60%] h-full border-r border-r-gray-300 bg-gray-100 ease-in-out duration-500 z-50 
+                        ${navOpen ? 'left-0' : 'left-[-100%]'}`}>
           <div className="m-4 p-4">
             <Link onClick={handleNavClose}
             to="/">
@@ -181,8 +179,7 @@ const Navbar = () => {
                 onMouseLeave={() => setDropdown(null)}
             >
               <Link onClick={() => {
-               toggleDropdown('cart');
-               handleNavClose()}}
+               toggleDropdown('cart')}}
                className="mx-4" to="/cart">
               <AiOutlineShoppingCart className="text-3xl text-stone-800" />
               </Link>

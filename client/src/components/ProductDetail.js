@@ -54,11 +54,11 @@ function ProductDetail(){
     
 return (
    <div className="">
-         <div className="glassy-bg py-20 h-screen">
-             <div className="max-w-screen-xl container mx-auto py-32 backdrop-blur-md bg-white/40 p-6 rounded-3xl shadow-lg">
-             <h1 className="text-3xl font-bold mb-4 text-center">{product.name}</h1>
-             <div className="flex justify-around items-center w-full ">
-                 <div className="w-1/2 rounded-2xl overflow-hidden py-6">
+         <div className="glassy-bg py-20 min-h-screen">
+             <div className="max-w-screen-xl container mx-auto py-8 backdrop-blur-md bg-white/40 p-6 rounded-3xl shadow-lg">
+             <h1 className="text-2xl md:text-3xl font-bold mb-4 text-center">{product.name}</h1>
+             <div className="flex flex-col md:flex-row justify-around items-center w-full ">
+                 <div className="w-full md:w-1/2 rounded-2xl overflow-hidden py-6">
                  <Link to="/products">
                      <img className="w-2/3 mx-auto rounded-2xl object-cover shadow-lg transition duration-300 hover:scale-110" src={product.image_url} alt={product.name} />
                  </Link>
@@ -72,10 +72,10 @@ return (
                      </button>
                  </div>
                  </div>
-                 <div className="w-1/2">
-                 <div className="description w-full mx-auto">
-                 <h2 className="h2  font-bold mb-4">About the Product:</h2>
-                 <p className="text-lg text-justify ">{product.description}</p>
+                 <div className="w-full md:w-1/2 mt-6 md:mt-0">
+                 <div className="w-full mx-auto">
+                 <h2 className="text-xl text-center font-bold mb-4">About the Product:</h2>
+                 <p className="text-base md:text-lg text-justify ">{product.description}</p>
                  </div>
                  </div>
                  </div>
