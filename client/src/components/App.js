@@ -25,7 +25,7 @@ function App() {
 
   const { setUser } = useContext(UserContext);
 
-  // state:
+  //  products state:
   const [products, setProducts] = useState([]);
   
 
