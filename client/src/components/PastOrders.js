@@ -46,7 +46,7 @@ return (
       <p>No past orders found.</p>
     ) : (
       pastOrders.map((order, index) => (
-        <div key={index} className="md:w-2/3 backdrop-blur-md bg-white/40 p-8 rounded-3xl shadow-lg ">
+        <div key={index} className="md:w-2/3 backdrop-blur-md bg-white/40 p-8 rounded-3xl shadow-lg mb-4">
            <h1 className="text-3xl font-bold mb-8 text-center">Past Orders</h1>
           <ul>
             {order.cart_products.map((cartProduct) => (

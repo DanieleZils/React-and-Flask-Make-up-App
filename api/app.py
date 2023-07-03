@@ -45,7 +45,6 @@ def create_checkout_session():
 
 
     
-    
 @app.route("/stripe_publishable_key")
 def get_stripe_publishable_key():
     return jsonify({"stripe_publishable_key": stripe_publishable_key})

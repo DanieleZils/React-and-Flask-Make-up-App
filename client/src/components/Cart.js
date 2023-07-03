@@ -209,7 +209,7 @@ return (
         {cart?.cart_products?.map((cartProduct) => (
          <div key={cartProduct.id} className="mb-8 overflow-hidden flex justify-between items-center">
           <Link to={`/products/${cartProduct.product.id}`}>
-            <img className="h-auto w-full md:h-80 lg:mx-20 object-cover rounded-md shadow-lg p-2 transition duration-300 hover:scale-110" src={cartProduct.product.image_url} alt={cartProduct.product.name} />
+            <img className="h-auto w-full md:h-80 lg:mx-20 object-cover md:object-contain rounded-md shadow-lg p-2 transition duration-200 hover:scale-95 mb-4" src={cartProduct.product.image_url} alt={cartProduct.product.name} />
           </Link>
           <div className="w-1/2">
             <h2 className="text-xl font-bold text-center">{cartProduct.product.name}</h2>
