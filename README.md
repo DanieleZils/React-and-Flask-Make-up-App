@@ -1,6 +1,6 @@
 # Pure Glow Makeup App 
 
-### Demo link: https://www.loom.com/share/7fed92dcff8145fab169f2fcb5f028c2?sid=fca78f47-ddb9-4f65-a912-6a035151f891 
+Demo link: https://www.loom.com/share/7fed92dcff8145fab169f2fcb5f028c2?sid=fca78f47-ddb9-4f65-a912-6a035151f891 
 
 ## Description
 
