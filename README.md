@@ -1,7 +1,5 @@
 # Pure Glow Makeup App 
 
-Demo link: https://www.loom.com/share/7fed92dcff8145fab169f2fcb5f028c2?sid=fca78f47-ddb9-4f65-a912-6a035151f891 
-
 ## Description
 
 Pure Glow is a comprehensive e-commerce website for makeup products, leveraging modern technologies for a smooth and secure shopping experience.
@@ -49,6 +47,8 @@ The application should now be running on ```localhost:3000.```
 1.A wide array of makeup products to choose from.
 2.Secure checkout process using Stripe API (test mode).
 3.Responsive and intuitive user interface.
+
+Demo link: https://www.loom.com/share/7fed92dcff8145fab169f2fcb5f028c2?sid=fca78f47-ddb9-4f65-a912-6a035151f891 
 
 ## Website Screenshots
 
